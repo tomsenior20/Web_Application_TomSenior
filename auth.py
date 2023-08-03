@@ -33,7 +33,7 @@ def check_register(full_name,password,admin_privilege):
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
         returned_register_message = check_and_register_user(full_name,password,admin_privilege)
-        # Check the Message returned and assign a msg
+        # Check the Message returned and assign a msg to it
         if returned_register_message == "Success, User has been registered":
             msg = "Success, User has been registered"
         elif returned_register_message == "User already exists in the database.":

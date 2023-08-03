@@ -1,3 +1,9 @@
+.welcomeHeaderText{
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.007em;
+    text-shadow: 1px 1px #f1f1f1;
+}
+
 .dataReturned{
     background: rgba(72, 71, 71, 0.75);
 }
@@ -15,4 +21,13 @@
     letter-spacing: 0.0003em;
     padding:1rem;
     border: 1px solid #f1f1f1;
+}
+
+@media screen and (max-width: 800px) {
+    .dataReturned{
+        width: 90% !important;
+    }
+    .buttonContainer,.buttonMainContainer{
+        width:100% !important;
+    }
 }

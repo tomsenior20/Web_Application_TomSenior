@@ -45,8 +45,8 @@
     {% endif %}
     {% endwith %}
     <Section class="dataSection d-flex flex-column">
-        <div>
-            <h1 class="fs-2 text-center my-3">Welcome to the Home Page</h1>
+        <div class="my-3 p-2">
+            <h1 class="fs-2 text-center my-3 welcomeHeaderText">Welcome to the Home Page</h1>
         </div>
         <div class="dataReturned w-75 m-auto p-3">
             <h2 class="fs-4 text-center m-2">Data from the Database</h2>
@@ -73,11 +73,11 @@
             {% endif %}
         </div>
         <!-- Section for buttons to show / delete update data -->
-        <div class="d-flex flex-row p-3 align-items-center justify-content-evenly m-auto w-75">
+        <div class="buttonMainContainer d-flex flex-column flex-md-row flex-lg-row flex-xl-row p-3 align-items-center justify-content-evenly m-auto w-75">
             {% for user in returned_user%}
             {% if user and user.admin_privilege == 'yes' %}
             <!-- Button for Updating Data in the Database -->
-            <div class=" d-flex flex-row w-50">
+            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
@@ -87,14 +87,14 @@
                 </form>
             </div>
             <!-- Button for Deleting Data from the Database -->
-            <div class=" d-flex flex-row w-50">
+            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50  buttonContainer">
                 <form action="/delete_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2"  Placeholder="Type Location name to delete row" name='nameDelete' id="nameDelete"></input>
                 <button class="btn btn-light my-2">Delete Row</button>
                 </form>
             </div>
             <!-- Button for Creating Data into the Database -->
-            <div class=" d-flex flex-row w-50">
+            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50  buttonContainer">
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
@@ -103,7 +103,7 @@
             </div>
             {% else %}
                 <!-- If not admin user you will be only be able to update / create ( Read only covered via Data rendered to page -->
-            <div class=" d-flex flex-row w-50">
+            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
@@ -111,7 +111,7 @@
                 </form>
             </div>
             <!-- Button for Updating Data in the Database -->
-            <div class=" d-flex flex-row w-50">
+            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
