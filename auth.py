@@ -1,7 +1,7 @@
 from flask import Flask, flash,render_template
 from method import *
 
-
+# Login Function
 def check_login(user_id,logInPassword):
     # Check for null values in form data
     if not all((user_id.strip(),logInPassword.strip())):
@@ -20,9 +20,6 @@ def check_login(user_id,logInPassword):
             login_message = "error"
             flash('Error', 'error')
     return login_message
-
-
-
 
 
 # Registers the user function
@@ -63,12 +60,13 @@ def check_delete(location):
 
 # Inserting Row Function
 def insert_row(location, comment):
+    # Check if the location passed is null or not
     if not (location and comment):
         flash("Invlalid inputs", 'error')
         status_msg = 'error'
     else:
         status_check_insert = inserting_row(location,comment)
-        
+        #Checks if the response is succefull or not 
         if status_check_insert == "success":
             status_msg = "Row Successfully Inserted"
         else:

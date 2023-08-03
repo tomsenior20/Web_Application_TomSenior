@@ -149,7 +149,7 @@ def inserting_row(location,comment):
     
     cursor.execute("SELECT * FROM data where Location =?", (location,))
     location_exists = cursor.fetchall()
-    
+    # Checks if the record exsists
     if location_exists:
         msg = "Location already is in data, no duplicates allowed"
     else:
@@ -168,7 +168,7 @@ def update_location(oldLocation, newLocation):
     # See if the record is present in the DB with the old location name
     cursor.execute("select * from data WHERE Location = ?",(newLocation,))
     exisitng_location = cursor.fetchall()
-    
+    # Checks if the record exsists
     if exisitng_location:
         location_msg = "Error - New location already exists in the database"
     else:
@@ -176,7 +176,7 @@ def update_location(oldLocation, newLocation):
         location_record = cursor.fetchall()
         
         if location_record:
-            # Execute the SQL
+            # Execute the SQL to update Location
             cursor.execute("UPDATE data SET Location =? WHERE Location = ? ", (newLocation, oldLocation))
             conn.commit()
             location_msg = "Successfully Updated Row"
@@ -192,15 +192,16 @@ def update_comment(oldComment, newComment):
      # See if the record is present in the DB with the old comment
     cursor.execute("select * from data WHERE Comment = ?",(newComment,))
     existing_comment = cursor.fetchall()
-    
+    # If the record is existing then we don't want to over ride it / throw error
     if existing_comment:
         comment_msg = "Error - New Comment already exists in the database"
     else:
+        # Selects the all comment from the DB
         cursor.execute("select * from data WHERE Comment = ?",(oldComment,))
         comment_record = cursor.fetchall()
         
         if comment_record:
-            # Execute the SQL
+            # Execute the SQL and Updates the Value
             cursor.execute("UPDATE data SET Comment = ? WHERE Comment = ? ", (newComment, oldComment))
             conn.commit()
             comment_msg = "Successfully Updated Row"
