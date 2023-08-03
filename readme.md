@@ -1,9 +1,15 @@
-<!-- Create Virtual Environment -->
+# Create Virtual Environment
 python3 -m venv <name of environment>
-<!-- Activating the Environment -->
+# Activating the Environment
 source venv/bin/activate
 # Can intall flask
 python3 install flask
+# Run Environment via the Source code
+The code can either be ran via the following two options:
+
+1) python3 test.py
+2) debugger window - via the flask application.
+3) it will then provide a IP in the terminal which will normally be host :5000
 
 # Example of how to activate the sqlite3
 
