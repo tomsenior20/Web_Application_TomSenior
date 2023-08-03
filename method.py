@@ -189,7 +189,7 @@ def update_location(oldLocation, newLocation):
 def update_comment(oldComment, newComment):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
-     # See if the record is present in the DB with the old comment
+    # See if the record is present in the DB with the old comment
     cursor.execute("select * from data WHERE Comment = ?",(newComment,))
     existing_comment = cursor.fetchall()
     # If the record is existing then we don't want to over ride it / throw error
