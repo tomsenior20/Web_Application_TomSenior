@@ -93,19 +93,33 @@
                 <button class="btn btn-light my-2">Delete Row</button>
                 </form>
             </div>
-            <!-- Button for Inserting Data into the Database -->
+            <!-- Button for Creating Data into the Database -->
             <div class=" d-flex flex-row w-50">
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
-                <button class="btn btn-light my-2">Insert Row</button>
+                <button class="btn btn-light my-2">Create Row</button>
                 </form>
             </div>
             {% else %}
-                <!-- If not admin user you won't be able to see anything apart from the data -->
-                <div class="col-12">
-                    <p class="text-center my-3">You have read only privileges</p>
-                </div>
+                <!-- If not admin user you will be only be able to update / create ( Read only covered via Data rendered to page -->
+            <div class=" d-flex flex-row w-50">
+                <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
+                <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
+                <button class="btn btn-light my-2">Create Row</button>
+                </form>
+            </div>
+            <!-- Button for Updating Data in the Database -->
+            <div class=" d-flex flex-row w-50">
+                <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
+                <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
+                <button class="btn btn-light my-2">Update Row</button>
+                </form>
+            </div>
             {% endif %}
             {% endfor %}
             </div>
