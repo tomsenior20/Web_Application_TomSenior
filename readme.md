@@ -15,4 +15,3 @@ python3 install flask
 <!-- example doesn't include id, due to being auto incrementing -->
 INSERT INTO data (LOCATION, COMMENT) VALUES ('Crewe', 'Old Office Location');# Web_Application_TomSenior
 # Web_Application_TomSenior
-# Web_Application_TomSenior
