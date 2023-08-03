@@ -1,0 +1,12 @@
+nav{
+    background: rgba(61, 60, 60, 0.35);
+    height: 60px;
+}
+
+.navName, .logout{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #f1f1f1;
+    text-decoration: none;
+    margin:0;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='default.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='nav.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='footer.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='home.css')}}">
+</head>
+
+<body>
+    <!-- Navigation Section -->
+    <nav class="d-flex justify-content-between align-items-center p-1">
+        <div class="navNameContainer p-3 align-items-center d-flex">
+            <h1 class="navName fs-5">
+                Tom Senior
+            </h1>
+        </div>
+           <!-- Logout button only present when logged in Section -->
+        <div class="logoutContainer p-3">
+           <a class="logout fs-5" href="{{url_for('redirect_to_index')}}">Log Out</a>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == "error" %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <Section class="dataSection d-flex flex-column">
+        <div>
+            <h1 class="fs-2 text-center my-3">Welcome to the Home Page</h1>
+        </div>
+        <div class="dataReturned w-75 m-auto p-3">
+            <h2 class="fs-4 text-center m-2">Data from the Database</h2>
+            <!-- if returned_data is greater than 0, continue to execute this code -->
+             {% if returned_data %}
+            <div class="data_row row d-flex flex-row">
+                <div class="data_record_text col-6 d-flex align-items-center p-2">
+                    <p class="fs-3 m-0">Location</p>
+                </div>
+                <div class="data_record_text col-6 d-flex align-items-center p-2">
+                    <p class="fs-3 m-0">Comment</p>
+                </div>
+                {% for data_recrord in returned_data%}
+                <!-- This section renders the Location and Comment from the Database -->
+                 <div class="data_record_text col-6 p-1"> {{data_recrord.Location}}</div>
+                 <div class="data_record_text col-6 p-1"> {{data_recrord.comment}}</div>
+                {% endfor %}
+            </div>
+            <!-- Show this section if data is null -->
+            {% else %}
+            <div class="no_data text-center mt-3"
+                <p class="data_record_text my-3">No Data Avaliable, Try again Later</p>
+            </div>
+            {% endif %}
+        </div>
+        <!-- Section for buttons to show / delete update data -->
+        <div class="d-flex flex-row p-3 align-items-center justify-content-evenly m-auto w-75">
+            {% for user in returned_user%}
+            {% if user and user.admin_privilege == 'yes' %}
+            <!-- Button for Updating Data in the Database -->
+            <div class=" d-flex flex-row w-50">
+                <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
+                <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
+                <button class="btn btn-light my-2">Update Row</button>
+                </form>
+            </div>
+            <!-- Button for Deleting Data from the Database -->
+            <div class=" d-flex flex-row w-50">
+                <form action="/delete_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
+                <input type="text" class="form-control mt-2"  Placeholder="Type Location name to delete row" name='nameDelete' id="nameDelete"></input>
+                <button class="btn btn-light my-2">Delete Row</button>
+                </form>
+            </div>
+            <!-- Button for Inserting Data into the Database -->
+            <div class=" d-flex flex-row w-50">
+                <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
+                <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
+                <button class="btn btn-light my-2">Insert Row</button>
+                </form>
+            </div>
+            {% else %}
+                <!-- If not admin user you won't be able to see anything apart from the data -->
+                <div class="col-12">
+                    <p class="text-center my-3">You have read only privileges</p>
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </Section>
+    <!-- Footer -->
+    <footer>
+        <div class="copyrightContainer d-flex align-items-center justify-content-start p-3">
+            <span class="mx-1">&copy;</span>
+            <h1 class="footerText fs-5">Tom Senior</h1>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
