@@ -4,13 +4,12 @@
 }
 
 html,body{
+    position: relative;
     background: linear-gradient(90deg, rgb(76, 100, 136),rgb(32, 91, 179));
     color:white;
-    min-height: 100vh;
+    min-height: 100%;
     box-sizing: border-box;
     overflow: auto;
-}
-
-html{
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }

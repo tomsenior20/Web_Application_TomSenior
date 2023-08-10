@@ -22,18 +22,18 @@ def check_login(user_id,logInPassword):
 def check_register(full_name,password,admin_privilege):
     # Check for null values in form data
     if not all((full_name.strip(), password.strip() , admin_privilege.strip())):
-        msg = "Error, Invalid Input"
+        msg = "Please Fill out all Inputs"
     # Handles all scenarios to when char are less than 4 or admin priv is not equal to the string, removes whitespace using .strip()
     elif len(full_name.strip()) < 4 or len(password.strip()) < 4 or (admin_privilege.strip() != "yes" and admin_privilege.strip() != "no"):
-        msg = 'Error Invalid Input'
+        msg = 'one of the mininum inputs requirements havent been met'
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
         returned_register_message = check_and_register_user(full_name,password,admin_privilege)
         # Check the Message returned and assign a msg to it
         if returned_register_message == "Success, User has been registered":
-            msg = "Success, User has been registered"
+            msg = returned_register_message
         elif returned_register_message == "User already exists in the database.":
-            msg = "User already exists in the database."
+            msg = returned_register_message
 
     return msg
 

@@ -1,15 +1,24 @@
+.dataSection{
+    height: calc(100vh - 120px);
+}
 .welcomeHeaderText{
     font-family: Arial, Helvetica, sans-serif;
-    letter-spacing: 0.007em;
-    text-shadow: 1px 1px #f1f1f1;
+    letter-spacing: 0.07em;
+    text-shadow: 1px 1px #cccbcb;
+    text-decoration: underline;
+    line-height: 1.5;
 }
 
 .dataReturned{
-    background: linear-gradient(90deg, rgb(131, 127, 127), rgba(126, 123, 123, 0.6))
+    background: linear-gradient(90deg, rgb(238, 238, 238), rgba(238, 237, 237, 1))
 }
 
-.dataSection{
-    height: calc(100vh - (60px + 60px));
+.dataRetunedHeader{
+    font-size:20x;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    color: rgba(0, 0, 0, 1);
 }
 
 .data_row{
@@ -21,10 +30,10 @@
 .data_record_text {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
-    color:#f1f1f1;
+    color: rgba(0, 0, 0, 1);
     letter-spacing: 0.0003em;
     padding:1rem;
-    border: 1px solid #f1f1f1;
+    border: 1px solid rgba(0, 0, 0, 1);
 }
 
 @media screen and (max-width: 800px) {
@@ -34,4 +43,10 @@
     .buttonContainer,.buttonMainContainer{
         width:100% !important;
     }
+}
+
+@media screen and (max-width: 600px) {
+        .dataSection{
+            height:auto;
+        }
 }
