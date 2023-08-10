@@ -63,8 +63,8 @@ def check_delete(location):
 
 def insert_row(location, comment, jobRole, company):
     # Check if the location passed is null or not
-    if not (location and comment):
-        status_msg = 'Invalid inputs'
+    if not (location and comment) or not (jobRole and company) or len(location) < 4:
+        status_msg = 'One of the inputs are invalid'
     else:
         status_check_insert = inserting_row(
             location, comment, jobRole, company)
@@ -82,12 +82,12 @@ def insert_row(location, comment, jobRole, company):
 def update_row_attempt(currentComment, newComment):
     update_msg = None
     attempt_comment_update = None
-
+    # Checks for the user comment is not null and above 2 characters
     if currentComment and newComment and len(newComment) > 2:
         attempt_comment_update = update_comment(currentComment, newComment)
     else:
         update_msg = 'error'
-
+    # Gets Response from my attempt to update comment
     if attempt_comment_update == 'Successfully Updated Row':
         update_msg = 'Update Successful'
 

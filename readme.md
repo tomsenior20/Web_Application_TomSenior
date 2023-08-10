@@ -37,9 +37,11 @@ For the data to display on the page, this should be set up prior to accessing. H
 3) If admin is "no", you will just be able to see the rendered data. With a message showing "You have read only permisions"
 
 # Unit Tests - (Completed only ) 
-Can be accessed via testing.py
+Can be accessed via testing.py - Have creates some test scenarios for each 
+Please note there is one which has been commented out - for future development.
 
-1) check_login (aut.py)
+1) check_login (auth.py)
+2) check_register (auth.py)
 
 # Can run test via the following command
 - python3 testing.py

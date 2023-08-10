@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask, render_template, flash
-from classes import User, DataRecord
+from model import User, DataRecord
 
 # Creates the tables on page load
 
@@ -37,12 +37,12 @@ def create_users_table():
     '''
     ]
 
-    # We then Loop over the array to execute by index
+    # then loop over the list
     for table in create_table:
-        # Runs the SQL Query to create each table from our array
+        # Runs the SQL Query to create each table from our list
         cursor.execute(table)
 
-    # I attempt to then commit and close the connection
+    # commit, close the connection
     conn.commit()
     conn.close()
 
@@ -59,13 +59,13 @@ def check_and_register_user(user_id, password, admin_privilege):
     existing_user = cursor.fetchone()
     # if condition = true return the string
     if existing_user:
-        # User already exists
+        # User is present in users table
         msg = "User already exists in the database."
     else:
         # Write the user to the 'users' table if previous condition = false
         if len(user_id) >= 4 and len(password) >= 4 and (admin_privilege == "yes" or admin_privilege == "no"):
             try:
-                # Assigns the parameters to an object
+                # Assigns the parameters to an class
                 new_user = User(user_id, password, admin_privilege)
                 cursor.execute("INSERT INTO users (user_id, Password, Admin) VALUES (?, ?, ?)", (
                     new_user.user_id, new_user.password, new_user.admin_privilege))
@@ -87,12 +87,14 @@ def check_login_check(username, password):
     cursor = conn.cursor()
     # Gets the parameters for the username & password and removes whitespace.
     if username and username.strip() and password and password.strip():
+        # Decided to use placeholders, instead of a string for added security.
         cursor.execute(
             "SELECT * from users WHERE user_id = ? AND password = ?", (username, password))
+        # Fetchs one record using fetchone()
         user = cursor.fetchone()
         # Checks if the user exists
         if user:
-            # Assigns each column to the User Class
+            # Assigns each column to my class
             retuned_record = User(user[1], user[2], user[3])
             # Checks if the entered password & username match the record, return the relevant success / error message
             if retuned_record.password == password and retuned_record.user_id == username:
@@ -145,8 +147,8 @@ def get_user_record(username, password):
     for matched_user in user:
         matched_user_record = User(
             matched_user[1], matched_user[2], matched_user[3])
+        # Once i've created my user class append to list
         matched_record.append(matched_user_record)
-    # close connection
     conn.close()
     return matched_record
 
@@ -166,13 +168,12 @@ def delete_row(location):
             ("DELETE FROM data WHERE Location = ?", (location,)),
             ("DELETE FROM assignmentGroup WHERE Location = ?", (location,))
         ]
-
+        # loop over list per delete statement
         for delete_row, values in delete_row:
             cursor.execute(delete_row, values)
 
         conn.commit()
         delete_msg = "success"
-    # Close Connection
     else:
         delete_msg = "error"
 
@@ -199,7 +200,7 @@ def inserting_row(location, comment, jobRole, company):
             ("INSERT INTO assignmentGroup (LOCATION, JOBROLE, COMPANY) VALUES (?, ?, ?)",
              (location, jobRole, company))
         }
-
+        # Loop over my list for insert statement
         for insert, values in insert_row:
             cursor.execute(insert, values)
 
@@ -252,7 +253,6 @@ def update_comment(oldComment, newComment):
         comment_record = cursor.fetchall()
 
         if comment_record:
-            # Execute the SQL and Updates the Value
             cursor.execute(
                 "UPDATE data SET Comment = ? WHERE Comment = ? ", (newComment, oldComment))
             conn.commit()

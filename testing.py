@@ -1,4 +1,5 @@
 import unittest
+# Patch allows for me to mock the method
 from unittest.mock import patch
 from auth import check_login, check_register
 
@@ -29,6 +30,8 @@ class TestInsertRow(unittest.TestCase):
         self.assertEqual(result, "Please fill in all fields.")
 
     # Testing the Registering
+
+    # * note for TS will need to find a unique string each time it is ran, for this to work **
 
     # This needs to have unique entry each time or the test will fail
     # @patch('auth.check_register')
