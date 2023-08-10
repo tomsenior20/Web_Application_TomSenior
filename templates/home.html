@@ -53,16 +53,24 @@
             <!-- if returned_data is greater than 0, continue to execute this code -->
              {% if returned_data %}
             <div class="data_row row d-flex flex-row">
-                <div class="data_record_text col-6 d-flex align-items-center p-2">
+                <div class="data_record_text col-3 d-flex align-items-center p-2">
                     <p class="fs-3 m-0">Location</p>
                 </div>
-                <div class="data_record_text col-6 d-flex align-items-center p-2">
+                <div class="data_record_text col-3 d-flex align-items-center p-2">
                     <p class="fs-3 m-0">Comment</p>
                 </div>
-                {% for data_recrord in returned_data%}
+                <div class="data_record_text col-3 d-flex align-items-center p-2">
+                    <p class="fs-3 m-0">Job Role</p>
+                </div>
+                <div class="data_record_text col-3 d-flex align-items-center p-2">
+                    <p class="fs-3 m-0">Company</p>
+                </div>
+                {% for data_record in returned_data%}
                 <!-- This section renders the Location and Comment from the Database -->
-                 <div class="data_record_text col-6 p-1"> {{data_recrord.Location}}</div>
-                 <div class="data_record_text col-6 p-1"> {{data_recrord.comment}}</div>
+                 <div class="data_record_text col-3 p-1"> {{data_record.Location}}</div>
+                 <div class="data_record_text col-3 p-1"> {{data_record.comment}}</div>
+                <div class="data_record_text col-3 p-1"> {{data_record.jobrole}}</div>
+                <div class="data_record_text col-3 p-1"> {{data_record.company}}</div>
                 {% endfor %}
             </div>
             <!-- Show this section if data is null -->
@@ -79,8 +87,6 @@
             <!-- Button for Updating Data in the Database -->
             <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
-                <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
                 <button class="btn btn-light my-2">Update Row</button>
@@ -98,6 +104,8 @@
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Job Role" name='jobRole' id="jobRole"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Company" name='companyInsert' id="companyInsert"></input>
                 <button class="btn btn-light my-2">Create Row</button>
                 </form>
             </div>
@@ -107,14 +115,14 @@
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location name (New Location required)" name='nameInsert' id="nameInsert"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Job Role" name='jobRole' id="jobRole"></input>
+                <input type="text" class="form-control mt-2" Placeholder="Enter Company" name='companyInsert' id="companyInsert"></input>
                 <button class="btn btn-light my-2">Create Row</button>
                 </form>
             </div>
             <!-- Button for Updating Data in the Database -->
             <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
-                <input type="text" class="form-control mt-2" Placeholder="Enter Current Location" name="currentLocation" id="currentLocation"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter New Location" name="newLocation" id="newLocation"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
                 <button class="btn btn-light my-2">Update Row</button>

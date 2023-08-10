@@ -22,10 +22,17 @@ def create_users_table():
     ''',
         '''
         CREATE TABLE IF NOT EXISTS data (
+            LOCATION STRING NOT NULL PRIMARY KEY,
+            COMMENT STRING NOT NULL 
+        )
+    ''',
+        '''
+            CREATE TABLE IF NOT EXISTS assignmentGroup(
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
-            LOCATION STRING NOT NULL,
-            COMMENT STRING NOT NULL
-            
+            LOCATION TEXT NOT NULL,
+            JOBROLE STRING NOT NULL,
+            COMPANY STRING NOT NULL,
+            FOREIGN KEY (LOCATION) REFERENCES data (LOCATION)
         )
     '''
     ]
@@ -107,14 +114,15 @@ def display_data():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
     # Executes the SQL Query
-    cursor.execute("SELECT * FROM data")
+    cursor.execute(
+        "SELECT data.LOCATION,data.comment,assignmentGroup.JOBROLE,assignmentGroup.COMPANY FROM data JOIN assignmentGroup ON data.LOCATION = assignmentGroup.LOCATION")
     # Fetches all the rows associated to the query
     rows = cursor.fetchall()
     # Creates Empty array for the data
     record_list = []
     # For each row in the fetched rows, create new DataRecord object and assign values and append to previous object
     for record in rows:
-        data_record = DataRecord(record[2], record[1])
+        data_record = DataRecord(record[0], record[1], record[2], record[3])
         record_list.append(data_record)
     # Close Connection
     conn.close()
@@ -154,7 +162,14 @@ def delete_row(location):
 
     if row_present:
         # Executes the SQL Query via DELETE
-        cursor.execute("DELETE FROM data WHERE Location = ?", (location,))
+        delete_row = [
+            ("DELETE FROM data WHERE Location = ?", (location,)),
+            ("DELETE FROM assignmentGroup WHERE Location = ?", (location,))
+        ]
+
+        for delete_row, values in delete_row:
+            cursor.execute(delete_row, values)
+
         conn.commit()
         delete_msg = "success"
     # Close Connection
@@ -167,7 +182,7 @@ def delete_row(location):
 # Inserting Row function
 
 
-def inserting_row(location, comment):
+def inserting_row(location, comment, jobRole, company):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
@@ -177,9 +192,17 @@ def inserting_row(location, comment):
     if location_exists:
         msg = "Location already is in data, no duplicates allowed"
     else:
+
         # Execute the SQL query using wildcard
-        cursor.execute(
-            "INSERT INTO data (Location, Comment) VALUES (?,?)", (location, comment))
+        insert_row = {
+            ("INSERT INTO data (Location, Comment) VALUES (?, ?)", (location, comment)),
+            ("INSERT INTO assignmentGroup (LOCATION, JOBROLE, COMPANY) VALUES (?, ?, ?)",
+             (location, jobRole, company))
+        }
+
+        for insert, values in insert_row:
+            cursor.execute(insert, values)
+
         conn.commit()
         msg = "success"
 

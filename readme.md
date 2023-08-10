@@ -22,7 +22,8 @@ The code can either be ran via the following two options:
 6) Alternatively you can see all data present in the tables, via SQL Explorer and right click on the table and click "show Table"
 
 # example doesn't include id, due to being auto incrementing
-INSERT INTO data (LOCATION, COMMENT) VALUES ('Crewe', 'Old Office Location');# Web_Application_TomSenior
+INSERT INTO data (LOCATION, COMMENT) VALUES ('Crewe', 'Old Office Location');
+INSERT INTO assignmentGroup (LOCATION, JOBROLE,COMPANY) VALUES ('Crewe', 'PLUMBER', 'PLUMBERCO');
 
 # Things to note 
 For the data to display on the page, this should be set up prior to accessing. However, Please note if this table is empty, you will have to login as an admin user and you can create your own data and insert it into the table.

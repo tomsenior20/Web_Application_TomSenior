@@ -61,12 +61,13 @@ def check_delete(location):
 # Inserting Row Function
 
 
-def insert_row(location, comment):
+def insert_row(location, comment, jobRole, company):
     # Check if the location passed is null or not
     if not (location and comment):
         status_msg = 'Invalid inputs'
     else:
-        status_check_insert = inserting_row(location, comment)
+        status_check_insert = inserting_row(
+            location, comment, jobRole, company)
         # Checks if the response is succefull or not
         if status_check_insert == "success":
             status_msg = "Row Successfully Inserted"
@@ -78,22 +79,16 @@ def insert_row(location, comment):
 # Update Row
 
 
-def update_row_attempt(currentLocation, newLocation, currentComment, newComment):
+def update_row_attempt(currentComment, newComment):
     update_msg = None
     attempt_comment_update = None
-    attempt_location_update = None
 
-    if currentComment and newComment and not (currentLocation and newLocation):
+    if currentComment and newComment and len(newComment) > 2:
         attempt_comment_update = update_comment(currentComment, newComment)
-    elif currentLocation and newLocation and not (currentComment or newComment):
-        attempt_location_update = update_location(currentLocation, newLocation)
-    elif currentComment and newComment and currentLocation and newLocation:
-        attempt_comment_update = update_comment(currentComment, newComment)
-        attempt_location_update = update_location(currentLocation, newLocation)
-
-    if attempt_comment_update == 'Successfully Updated Row' or attempt_location_update == 'Successfully Updated Row':
-        update_msg = 'Update Successful'
     else:
-        update_msg = attempt_location_update or attempt_comment_update
+        update_msg = 'error'
+
+    if attempt_comment_update == 'Successfully Updated Row':
+        update_msg = 'Update Successful'
 
     return update_msg

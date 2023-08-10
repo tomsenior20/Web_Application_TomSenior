@@ -5,7 +5,11 @@ class User:
         self.password = password
         self.admin_privilege = admin_privilege
 # Creates the Data Record class
+
+
 class DataRecord:
-    def __init__(self, Location, comment):
+    def __init__(self, Location, comment, jobrole, company):
         self.Location = Location
         self.comment = comment
+        self.jobrole = jobrole
+        self.company = company

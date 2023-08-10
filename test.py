@@ -97,8 +97,10 @@ def insert_row_attempt():
         # Get Form Input for Insert
         location_to_insert = request.form.get('nameInsert')
         comment_to_insert = request.form.get('commentInsert')
+        jobRole_to_insert = request.form.get('jobRole')
+        company_to_insert = request.form.get('companyInsert')
         # Check insert Section and remove whitespace if accidentally added
-        checking_insert = insert_row(location_to_insert.strip(),comment_to_insert.strip())
+        checking_insert = insert_row(location_to_insert.strip(),comment_to_insert.strip(), jobRole_to_insert.strip(), company_to_insert.strip())
         # Checked for Success message from insert_row and handle correctly
         if checking_insert == "Row Successfully Inserted":
             flash(checking_insert, 'success')
@@ -118,12 +120,10 @@ def insert_row_attempt():
 def update_row():
     if request.method == "POST":
         # Get Form Input for Update
-        current_location = request.form.get('currentLocation')
-        new_location = request.form.get('newLocation')
         current_comment = request.form.get('currentComment')
         new_comment = request.form.get('newComment')
         # Check update row  Section and remove whitespace if accidentally added
-        attemping_update = update_row_attempt(current_location.strip(),new_location.strip(), current_comment.strip(), new_comment.strip())
+        attemping_update = update_row_attempt(current_comment.strip(), new_comment.strip())
         # Checked for Success message from update_row_attempt and handle correctly
         if attemping_update == "Update Successful":
             flash(attemping_update, 'success')
