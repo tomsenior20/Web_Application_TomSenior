@@ -1,6 +1,7 @@
 nav{
-    background: rgba(61, 60, 60, 0.35);
+    background: linear-gradient(90deg, rgb(76, 100, 136),rgba(32, 91, 179,0.5));
     height: 60px;
+    border-bottom:1px solid rgba(225, 224, 224, 0.4)
 }
 
 .navName, .logout{

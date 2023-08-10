@@ -5,7 +5,11 @@
 }
 
 .dataReturned{
-    background: rgba(72, 71, 71, 0.75);
+    background: linear-gradient(90deg, rgb(131, 127, 127), rgba(126, 123, 123, 0.6))
+}
+
+.dataSection{
+    height: calc(100vh - (60px + 60px));
 }
 
 .data_row{

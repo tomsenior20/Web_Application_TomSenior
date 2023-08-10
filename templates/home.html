@@ -73,7 +73,7 @@
             {% endif %}
         </div>
         <!-- Section for buttons to show / delete update data -->
-        <div class="buttonMainContainer d-flex flex-column flex-md-row flex-lg-row flex-xl-row p-3 align-items-center justify-content-evenly m-auto w-75">
+        <div class="buttonMainContainer d-flex flex-column flex-md-row flex-lg-row flex-xl-row p-2 align-items-center justify-content-evenly m-auto w-75">
             {% for user in returned_user%}
             {% if user and user.admin_privilege == 'yes' %}
             <!-- Button for Updating Data in the Database -->
