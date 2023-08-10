@@ -10,13 +10,14 @@
     background: linear-gradient(90deg, rgb(238, 238, 238), rgba(238, 237, 237, 1))
 }
 
-.dataRetunedHeader{
+.dataRetunedHeader, .no_data{
     font-size:20x;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 0.07em;
     line-height: 1;
     color: rgba(0, 0, 0, 1);
 }
+
 
 .data_row{
     width:100%;

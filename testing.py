@@ -65,6 +65,8 @@ class TestInsertRow(unittest.TestCase):
         self.assertEqual(
             result, 'one of the mininum inputs requirements havent been met')
 
+    # Delete Functionality Unit Test
+
 
 if __name__ == '__main__':
     unittest.main()
