@@ -28,7 +28,7 @@ def login():
         returned_message = check_login(user_id,password)
         # Returned data from the Data Table
 
-    if returned_message == 'success':
+    if returned_message == "Logged In Successfully":
         # Goes to the Display_Data method to display data from Data Table on success
         session['UserID'] = user_id
         session['Password'] = password

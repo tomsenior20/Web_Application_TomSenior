@@ -12,9 +12,9 @@ def check_login(user_id,logInPassword):
         # Goes to method.py to validate against DB
         check_login = check_login_check(user_id,logInPassword)
         if check_login == "Logged In Successfully":
-            login_message = "success"
+            login_message = check_login
         elif check_login == "invalid password" or "User does not exsist" or "Please Enter Valid Inputs":
-            login_message = "error"
+            login_message = check_login
     return login_message
 
 
