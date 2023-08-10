@@ -5,20 +5,16 @@ from method import *
 def check_login(user_id,logInPassword):
     # Check for null values in form data
     if not all((user_id.strip(),logInPassword.strip())):
-        flash('Please fill in all fields.', 'error')
-        login_message = "error"
+        login_message = "Please fill in all fields."
     elif len(user_id.strip()) < 4 or len(logInPassword.strip()) < 4:
-        flash('Password or Username is less than required characters.', 'error')
-        login_message = "error"
+        login_message = "Password or Username is less than required characters"
     else:
         # Goes to method.py to validate against DB
         check_login = check_login_check(user_id,logInPassword)
-        if check_login == "success":
-            flash("Success", 'success')
+        if check_login == "Logged In Successfully":
             login_message = "success"
-        elif check_login == "invalid password" or "User does not exsist":
+        elif check_login == "invalid password" or "User does not exsist" or "Please Enter Valid Inputs":
             login_message = "error"
-            flash('Error', 'error')
     return login_message
 
 
@@ -45,8 +41,7 @@ def check_register(full_name,password,admin_privilege):
 def check_delete(location):
     # Check if the location passed is null or not
     if not location:
-       flash("Please fill out Location Input",'error')
-       delete_msg = 'error'
+       delete_msg = 'Please fill out Location Input'
     else:
         # Go to method.py and perform the SQL Script to delete
         attempt_delete = delete_row(location)
@@ -62,8 +57,7 @@ def check_delete(location):
 def insert_row(location, comment):
     # Check if the location passed is null or not
     if not (location and comment):
-        flash("Invlalid inputs", 'error')
-        status_msg = 'error'
+        status_msg = 'Invalid inputs'
     else:
         status_check_insert = inserting_row(location,comment)
         #Checks if the response is succefull or not 

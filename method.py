@@ -62,27 +62,28 @@ def check_and_register_user(user_id, password, admin_privilege):
     return msg
 
 # Check Login Credentials
-def check_login_check(username,password):
+def check_login_check(username, password):
     # Connect to the database
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
-    # Gets the paramateres for the username & password and removes whitespace.
+    # Gets the parameters for the username & password and removes whitespace.
     if username and username.strip() and password and password.strip():
-        cursor.execute("SELECT * from users WHERE user_id = ? AND password = ?" ,(username,password))
+        cursor.execute("SELECT * from users WHERE user_id = ? AND password = ?", (username, password))
         user = cursor.fetchone()
-        # Checks if the user exsists
+        # Checks if the user exists
         if user:
             # Assigns each column to the User Class
             retuned_record = User(user[1], user[2], user[3])
             # Checks if the entered password & username match the record, return the relevant success / error message
             if retuned_record.password == password and retuned_record.user_id == username:
-                loginMsg = "success"
+                loginMsg = "Logged In Successfully"
             else:
-                loginMsg = "invalid password"
+                loginMsg = "Invalid password"
         else:
-            loginMsg = "User does not exsist"
+            loginMsg = "User does not exist"
     else:
-        return render_template("index.html")
+        loginMsg = "Please Enter Valid Inputs"
+    
     conn.close()
     return loginMsg
 

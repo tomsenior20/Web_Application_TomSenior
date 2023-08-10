@@ -25,10 +25,10 @@ def login():
         user_id = request.form.get('UserID')
         password = request.form.get('Password')
         # Goes to auth.py to handle the data and check Entered password matches entered
-        returned_message = check_login_check(user_id,password)
+        returned_message = check_login(user_id,password)
         # Returned data from the Data Table
 
-    if returned_message == "success":
+    if returned_message == 'success':
         # Goes to the Display_Data method to display data from Data Table on success
         session['UserID'] = user_id
         session['Password'] = password
