@@ -23,16 +23,20 @@ The level of user will determine what buttons will display on the page where the
 For this main home page, will differ based on the level of user you have signed in with. For example if you've signed in with an admin user, you will be able to see all of the buttons shown below. However, non admin will not have the delete option present. 
 
 The Data will automatically be re-rendered, upon action being completed.
-![Log In / Register Screen](static/login.jpeg)
+
+### The Image Below is for an admin user ( Please not the black lines, are redacted information)
+![Log In / Register Screen](static/adminPriv.jpeg)
+### The Image Below is for an non Admin user ( Please not the black lines, are redacted information)
+![Log In / Register Screen](static/nonAdmin.jpeg)
 
 
 # Create Virtual Environment
-python3 -m venv <name of environment>
+- python3 -m venv <name of environment>
 # Activating the Environment
-source venv/bin/activate
+- source venv/bin/activate
 # Intall Dependancies
-python3 install flask
-python3 install sqlite3
+- python3 install flask
+- python3 install sqlite3
 # Run Environment via the Source code
 The code can either be ran via the following two options:
 1. python3 test.py
@@ -48,8 +52,8 @@ The code can either be ran via the following two options:
 6. Alternatively you can see all data present in the tables, via SQL Explorer and right click on the table and click "show Table"
 
 # example doesn't include id, due to being auto incrementing
-INSERT INTO data (LOCATION, COMMENT) VALUES ('Crewe', 'Old Office Location');
-INSERT INTO assignmentGroup (LOCATION, JOBROLE,COMPANY) VALUES ('Crewe', 'PLUMBER', 'PLUMBERCO');
+- INSERT INTO data (LOCATION, COMMENT) VALUES ('Crewe', 'Old Office Location');
+- INSERT INTO assignmentGroup (LOCATION, JOBROLE,COMPANY) VALUES ('Crewe', 'PLUMBER', 'PLUMBERCO');
 
 # Things to note 
 1. For the data to display on the page, this should be set up prior to accessing. However, Please note if this table is empty, you will have to login as an admin user and you can create your own data and insert it into the table.
