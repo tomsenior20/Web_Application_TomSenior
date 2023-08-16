@@ -1,9 +1,28 @@
+# Summary of Web Application
+Hello, Welcome to my application. 
+
+The purpose of this application, was to solve a current issue with logging of issues or comments within Worldline at a certain Job role.
+
+## This application will provide the ability to do the two following actions:
+
+1. Log In ( if the user is already exists )
+2. Register ( provide the user with the ability to register and allow admin or not)
+
+![Log In / Register Screen](static/login.jpeg)
+
+
+
+
+
+
 # Create Virtual Environment
 python3 -m venv <name of environment>
 # Activating the Environment
 source venv/bin/activate
-# Intall flask
+# Intall Dependancies
 python3 install flask
+python3 install sqlite3
+
 # Run Environment via the Source code
 The code can either be ran via the following two options:
 
