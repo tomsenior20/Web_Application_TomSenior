@@ -1,5 +1,6 @@
 .loginContainer{
     height: calc(100vh - (60px + 60px)) !important;
+    min-width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,16 +23,14 @@
 }
 
 .formText{
-    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
-    line-height: 2;
+    font: 15px/2 SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     font-weight: 500;
     letter-spacing: -0.995px;
 }
 
 .registerRedirectButton,.loginButton,.backToLogInButton, .registerButton{
     text-decoration: none;
-    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+    font: 15px/1.5 SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     font-weight: 500;
     letter-spacing: 0.005px;
     color:black;

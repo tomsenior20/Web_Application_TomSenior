@@ -1,16 +1,18 @@
+/* Main Navigation Container */
 nav{
     background: linear-gradient(90deg, rgb(76, 100, 136),rgba(32, 91, 179,0.5));
     height: 60px;
-    border-bottom:1px solid rgba(225, 224, 224, 0.4)
+    border-bottom:1px solid rgba(225, 224, 224, 0.4);
+    min-width: 100vw;
 }
 
+/* Nav Text  */
 .navName, .logout{
-    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+    font: 15px/1.0005 SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     font-weight: 500;
     letter-spacing: 0.005px;
     color: #f1f1f1;
     text-decoration: none;
     margin:0;
-    line-height: 1.0005;
     text-transform: uppercase;
 }

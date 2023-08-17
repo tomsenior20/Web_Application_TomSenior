@@ -1,3 +1,4 @@
+/* Main Footer Container */
 footer{
     align-items: center;
     margin-top: auto;
@@ -7,13 +8,13 @@ footer{
     border-top:1px solid rgba(225, 224, 224, 0.4)
 }
 
+/* Footer Text */
 .footerText{
-    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+    font: 15px/1.0005 SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     font-weight: 500;
     color: #f1f1f1;
     text-decoration: none;
     margin:0;
-    line-height: 1.0005;
     letter-spacing: 0.005px;
     text-transform: uppercase;
 }
