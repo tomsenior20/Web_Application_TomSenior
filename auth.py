@@ -21,17 +21,17 @@ def check_login(user_id, logInPassword):
 
 
 # Registers the user function
-def check_register(full_name, password, admin_privilege):
+def check_register(full_name, password):
     # Check for null values in form data
-    if not all((full_name.strip(), password.strip(), admin_privilege.strip())):
+    if not all((full_name.strip(), password.strip())):
         msg = "Please Fill out all Inputs"
-    # Handles all scenarios to when char are less than 4 or admin priv is not equal to the string, removes whitespace using .strip()
-    elif len(full_name.strip()) < 4 or len(password.strip()) < 4 or (admin_privilege.strip() != "yes" and admin_privilege.strip() != "no"):
+    # Handles all scenarios to when char are less than 4 -  removes whitespace using .strip()
+    elif len(full_name.strip()) < 4 or len(password.strip()) < 4:
         msg = 'one of the mininum inputs requirements havent been met'
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
         returned_register_message = check_and_register_user(
-            full_name, password, admin_privilege)
+            full_name, password)
         # Check the Message returned and assign a msg to it
         if returned_register_message == "Success, User has been registered":
             msg = returned_register_message
@@ -68,7 +68,7 @@ def insert_row(location, comment, jobRole, company):
     else:
         status_check_insert = inserting_row(
             location, comment, jobRole, company)
-        # Checks if the response is succefull or not
+        # Checks if the response is success or not
         if status_check_insert == "success":
             status_msg = "Row Successfully Inserted"
         else:

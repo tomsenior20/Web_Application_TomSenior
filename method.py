@@ -49,7 +49,7 @@ def create_users_table():
 # Runs on register form submit
 
 
-def check_and_register_user(user_id, password, admin_privilege):
+def check_and_register_user(user_id, password):
     # Connect to the database
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
@@ -63,10 +63,10 @@ def check_and_register_user(user_id, password, admin_privilege):
         msg = "User already exists in the database."
     else:
         # Write the user to the 'users' table if previous condition = false
-        if len(user_id) >= 4 and len(password) >= 4 and (admin_privilege == "yes" or admin_privilege == "no"):
+        if len(user_id) >= 4 and len(password) >= 4:
             try:
                 # Assigns the parameters to an class
-                new_user = User(user_id, password, admin_privilege)
+                new_user = User(user_id, password, "no")
                 cursor.execute("INSERT INTO users (user_id, Password, Admin) VALUES (?, ?, ?)", (
                     new_user.user_id, new_user.password, new_user.admin_privilege))
                 conn.commit()

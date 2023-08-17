@@ -49,10 +49,10 @@ def register():
         # Gets the form value for all attributes
         full_name = request.form.get('registerUserID')
         password = request.form.get('registerPassword')
-        admin_privilege = request.form.get('admin_privilege')
-
+        # Sets Default on register to no admin
+        admin_privilege = "no"
         # Goes to auth.py to handle the data
-        returned_message = check_register(full_name, password, admin_privilege)
+        returned_message = check_register(full_name, password)
 
         # Based on condition, this will always render back to index.html
         if returned_message == "Success, User has been registered":

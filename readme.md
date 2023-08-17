@@ -14,7 +14,7 @@ The level of user will determine what buttons will display on the page where the
 ## This application will provide the ability to do the two following actions:
 
 1. Log In ( if the user is already exists )
-2. Register ( provide the user with the ability to register and allow admin or not)
+2. Register ( ** By Default the user will be set to none Admin, SQL Scripts are ran against it when authorized )
 
 ![Log In / Register Screen](static/login.jpeg)
 
