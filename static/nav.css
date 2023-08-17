@@ -5,11 +5,11 @@ nav{
 }
 
 .navName, .logout{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 0.005px;
     color: #f1f1f1;
     text-decoration: none;
     margin:0;
-    line-height: 1.5;
+    line-height: 1.005;
 }
