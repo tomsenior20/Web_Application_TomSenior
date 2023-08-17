@@ -9,9 +9,11 @@ footer{
 
 .footerText{
     font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     color: #f1f1f1;
     text-decoration: none;
     margin:0;
+    line-height: 1.0005;
     letter-spacing: 0.005px;
+    text-transform: uppercase;
 }
