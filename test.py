@@ -49,8 +49,6 @@ def register():
         # Gets the form value for all attributes
         full_name = request.form.get('registerUserID')
         password = request.form.get('registerPassword')
-        # Sets Default on register to no admin
-        admin_privilege = "no"
         # Goes to auth.py to handle the data
         returned_message = check_register(full_name, password)
 

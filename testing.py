@@ -45,7 +45,7 @@ class TestInsertRow(unittest.TestCase):
     @patch('auth.check_register')
     def test_invalid_reg(self, mock_text_reg):
         # Note this checks for < 4 characters
-        result = check_register("dd", "ddd", "yes")
+        result = check_register("dd", "ddd")
         print("@test_invalid_reg - " + result)
         self.assertEqual(
             result, 'one of the mininum inputs requirements havent been met')
@@ -54,7 +54,7 @@ class TestInsertRow(unittest.TestCase):
     @patch('auth.check_register')
     def test_null_reg(self, mock_text_reg):
         # Note checks for null entries
-        result = check_register("", "", "")
+        result = check_register("", "")
         print("@test_null_reg - " + result)
         self.assertEqual(
             result, 'Please Fill out all Inputs')
@@ -63,7 +63,7 @@ class TestInsertRow(unittest.TestCase):
     @patch('auth.check_register')
     def test_invalid_admin_reg(self, mock_text_reg):
         # Note checks for invalid admin entry
-        result = check_register("testuser", "testuser", "hello")
+        result = check_register("testuser", "testuser")
         print("@test_invalid_admin_reg - " + result)
         self.assertEqual(
             result, 'one of the mininum inputs requirements havent been met')
