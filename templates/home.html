@@ -45,40 +45,41 @@
     {% endif %}
     {% endwith %}
     <Section class="dataSection d-flex flex-column">
-        <div class="my-3 p-2">
-            <h1 class="text-center my-3 welcomeHeaderText">Worldline Note System</h1>
+        <div class="my-4 p-2">
+            <h1 class="text-center welcomeHeaderText">Worldline Note System</h1>
         </div>
-        <div class="dataReturned w-75 m-auto p-3 p-md-2">
-            <h2 class="dataRetunedHeader text-center m-2">Records of notes</h2>
-            <!-- if returned_data is greater than 0, continue to execute this code -->
-             {% if returned_data %}
-            <div class="data_row row d-flex flex-row">
-                <div class="data_record_text col-3 d-flex align-items-center p-2">
-                    <p class="fs-3 m-0">Location</p>
-                </div>
-                <div class="data_record_text col-3 d-flex align-items-center p-2">
-                    <p class="fs-3 m-0">Comment</p>
-                </div>
-                <div class="data_record_text col-3 d-flex align-items-center p-2">
-                    <p class="fs-3 m-0">Job Role</p>
-                </div>
-                <div class="data_record_text col-3 d-flex align-items-center p-2">
-                    <p class="fs-3 m-0">Company</p>
-                </div>
-                {% for data_record in returned_data%}
-                <!-- This section renders the Location and Comment from the Database -->
-                 <div class="data_record_text col-3 p-1"> {{data_record.Location}}</div>
-                 <div class="data_record_text col-3 p-1"> {{data_record.comment}}</div>
-                <div class="data_record_text col-3 p-1"> {{data_record.jobrole}}</div>
-                <div class="data_record_text col-3 p-1"> {{data_record.company}}</div>
+    <div class="dataReturned w-75 m-auto p-3 p-md-2">
+    <h2 class="dataRetunedHeader text-start my-2">Incidents Recorded: </h2>
+    <!-- if returned_data is greater than 0, continue to execute this code -->
+    {% if returned_data %}
+            <!-- Generates Table for the Data -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="data_record_header" scope="col">Location</th>
+                    <th class="data_record_header" scope="col">Comment</th>
+                    <th class="data_record_header" scope="col">Job Role</th>
+                    <th class="data_record_header" scope="col">Company</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- For each record the table row with table columns will be created -->
+                {% for data_record in returned_data %}
+                <tr>
+                    <td class="data_record_text">{{ data_record.Location }}</td>
+                    <td class="data_record_text">{{ data_record.comment }}</td>
+                    <td class="data_record_text">{{ data_record.jobrole }}</td>
+                    <td class="data_record_text">{{ data_record.company }}</td>
+                </tr>
                 {% endfor %}
-            </div>
-            <!-- Show this section if data is null -->
-            {% else %}
-            <div class="no_data text-center mt-3"
-                <p class="data_record_text my-3">No Data Avaliable, Try again Later</p>
-            </div>
-            {% endif %}
+            </tbody>
+        </table>
+        <!-- Creates Div if data is null -->
+        {% else %}
+        <div class="no_data text-center mt-3">
+            <p class="data_record_text my-3">No Data Avaliable, Try again Later</p>
+        </div>
+        {% endif %}
         </div>
         <!-- Section for buttons to show / delete update data -->
         <div class="buttonMainContainer d-flex flex-column flex-md-row flex-lg-row flex-xl-row p-2 align-items-center justify-content-evenly m-auto w-75">
