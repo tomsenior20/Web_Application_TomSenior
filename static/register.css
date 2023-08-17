@@ -1,0 +1,22 @@
+.registerContainer{
+    height: calc(100vh - (60px + 60px)) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerContainerForm{
+    background: rgba(33, 77, 143, 0.2);
+    border-radius: 1rem;
+    padding:3rem;
+    width:40%;
+    margin: auto;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+.input-group span{
+    width:30% !important;
+}

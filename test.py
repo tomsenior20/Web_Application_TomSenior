@@ -136,5 +136,15 @@ def update_row():
             
     return render_template('home.html',returned_data=returned_data,returned_user=returned_user)
 
+# Redirects to the Register Page
+@app.route('/redirect_to_Register_page')
+def redirect_to_register_page():
+    return render_template('register.html')
+
+# Redirects to the login page
+@app.route('/redirect_to_login_page')
+def redirect_to_login_page():
+    return render_template('index.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
