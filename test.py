@@ -1,150 +1,74 @@
-from flask import Flask, render_template, request, flash,jsonify,session
-from method import create_users_table, display_data
-from auth import *
-import pdb
+from unittest.mock import patch
+import unittest
+from auth import check_login, check_register
 
-app = Flask(__name__)
-app.config['DEBUG']= True
-app.config['SECRET_KEY'] = 'Senior'
 
-returned_user = None
-user_id = None
-password = None
+class TestInsertRow(unittest.TestCase):
+    # Unit Test for Log in Methods
+    @patch('auth.check_login')
+    def test_successful_login(self, mock_successfull_login):
+        mock_successfull_login = "success"
+        # Passing in valid credentials in DB
+        result = check_login("admin", "admin")
+        print("@test_successful_login - " + result)
+        self.assertEqual(result, "Logged In Successfully")
 
-@app.route('/')
-def hello():
-    # CREATES THE DATABASE IF THEY DON'T EXSIST
-    create_users_table()
-    return render_template("index.html")
+    @patch('auth.check_login')
+    def test_failed_login(self, mock_invalid_login):
+        # Setting Scenario for lower than char length
+        result = check_login("sss", "ss")
+        print("@test_failed_login -  " + result)
+        self.assertEqual(
+            result, "Password or Username is less than required characters")
 
-# Log In function
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == "POST":
-        # Gets the Username and Password from form
-        user_id = request.form.get('UserID')
-        password = request.form.get('Password')
-        # Goes to auth.py to handle the data and check Entered password matches entered
-        returned_message = check_login(user_id,password)
-        # Returned data from the Data Table
+    @patch('auth.check_login')
+    def test_invalid_inputs(self, mock_invalid_login):
+        # Testing For Empty Inputs
+        result = check_login("", "")
+        print("@test_invalid_inputs - " + result)
+        self.assertEqual(result, "Please fill in all fields.")
 
-    if returned_message == "Logged In Successfully":
-        # Goes to the Display_Data method to display data from Data Table on success
-        session['UserID'] = user_id
-        session['Password'] = password
-        returned_data = display_data()
-        returned_user = get_user_record(user_id,password)
-        # Flash Message is shown based of the returned message
-        flash(returned_message, "success")
-        return render_template("home.html", returned_data=returned_data, returned_user=returned_user)
-    else:
-        # Flash Message is shown based of the returned message
-        flash(returned_message, "error")
-        return render_template("index.html")
+    # Testing the Registering
 
-# Routing for Register Function
-@app.route('/register', methods=['POST'])
-def register():
-    if request.method == "POST":
-        # Gets the form value for all attributes
-        full_name = request.form.get('registerUserID')
-        password = request.form.get('registerPassword')
-        # Goes to auth.py to handle the data
-        returned_message = check_register(full_name, password)
+    # * note for TS will need to find a unique string each time it is ran, for this to work **
 
-        # Based on condition, this will always render back to index.html
-        if returned_message == "Success, User has been registered":
-            flash(returned_message, 'success')
-            return render_template("index.html")
-        else:
-            flash(returned_message, "error")
-            return render_template("index.html")
+    # This needs to have unique entry each time or the test will fail
+    # @patch('auth.check_register')
+    # def test_valid_reg(self, mock_text_reg):
+    #     # Note Before each test these needs to be unique
+    #     result = check_register("dddd", "dddd", "yes")
+    #     print("@test_valid_reg - " + result)
+    #     self.assertEqual(result, "Success, User has been registered")
 
-# Routing for the Log out button 
-@app.route('/redirect')
-def redirect_to_index():
-    # If Logout is requested this will send the user back to the Log In Page
-        return render_template('index.html')
+    # Check for Greater than 4 char
+    @patch('auth.check_register')
+    def test_invalid_reg(self, mock_text_reg):
+        # Note this checks for < 4 characters
+        result = check_register("dd", "ddd")
+        print("@test_invalid_reg - " + result)
+        self.assertEqual(
+            result, 'one of the mininum inputs requirements havent been met')
 
-# Delete Row Function
-@app.route('/delete_row_attempt', methods=["POST"])
-def delete_row_attempt():
-    if request.method == "POST":
-        # Get Form Input for delete
-        row_to_delete = request.form.get('nameDelete')
-        # Check delete Section
-        checking_delete = check_delete(row_to_delete)
-        # Checked for Success message from check_delete and handle correctly
-        if checking_delete == "Row Deleted":
-            flash(checking_delete, 'success')
-        else:
-            flash(checking_delete, 'error')
-        # Return Data to the page
-        returned_data = display_data()
-        # Get the Saved username and password from storage and pass in as param to show / hide correct buttons
-        user_id = session.get('UserID')
-        password = session.get('Password')
-        returned_user = get_user_record(user_id,password)
-            
-    return render_template('home.html',returned_data=returned_data,returned_user=returned_user)
+    # Checks for null entry
+    @patch('auth.check_register')
+    def test_null_reg(self, mock_text_reg):
+        # Note checks for null entries
+        result = check_register("", "")
+        print("@test_null_reg - " + result)
+        self.assertEqual(
+            result, 'Please Fill out all Inputs')
 
-# Insert Row function 
-@app.route('/insert_row_attempt', methods=["POST"])
-def insert_row_attempt():
-    if request.method == "POST":
-        # Get Form Input for Insert
-        location_to_insert = request.form.get('nameInsert')
-        comment_to_insert = request.form.get('commentInsert')
-        jobRole_to_insert = request.form.get('jobRole')
-        company_to_insert = request.form.get('companyInsert')
-        # Check insert Section and remove whitespace if accidentally added
-        checking_insert = insert_row(location_to_insert.strip(),comment_to_insert.strip(), jobRole_to_insert.strip(), company_to_insert.strip())
-        # Checked for Success message from insert_row and handle correctly
-        if checking_insert == "Row Successfully Inserted":
-            flash(checking_insert, 'success')
-        else:
-            flash(checking_insert, 'error')
-        # Return Data to the page after form submit
-        returned_data = display_data()
-        # Get the Saved username and password from storage and pass in as param to show / hide correct buttons
-        user_id = session.get('UserID')
-        password = session.get('Password')
-        returned_user = get_user_record(user_id,password)
-            
-        return render_template('home.html',returned_data=returned_data,returned_user=returned_user)
+    # Checks for valid name and password but incorrect admin
+    @patch('auth.check_register')
+    def test_invalid_admin_reg(self, mock_text_reg):
+        # Note checks for invalid admin entry
+        result = check_register("testuser", "testuser")
+        print("@test_invalid_admin_reg - " + result)
+        self.assertEqual(
+            result, 'User already exists in the database.')
 
-# Update Row Function
-@app.route('/update_row', methods=["POST"])
-def update_row():
-    if request.method == "POST":
-        # Get Form Input for Update
-        current_comment = request.form.get('currentComment')
-        new_comment = request.form.get('newComment')
-        # Check update row  Section and remove whitespace if accidentally added
-        attemping_update = update_row_attempt(current_comment.strip(), new_comment.strip())
-        # Checked for Success message from update_row_attempt and handle correctly
-        if attemping_update == "Update Successful":
-            flash(attemping_update, 'success')
-        else:
-            flash(attemping_update, 'error')
-        # Return Data to the page after form submit
-        returned_data = display_data()
-        # Get the Saved username and password from storage and pass in as param to show / hide correct buttons
-        user_id = session.get('UserID')
-        password = session.get('Password')
-        returned_user = get_user_record(user_id,password)
-            
-    return render_template('home.html',returned_data=returned_data,returned_user=returned_user)
+    # Delete Functionality Unit Test
 
-# Redirects to the Register Page
-@app.route('/redirect_to_Register_page')
-def redirect_to_register_page():
-    return render_template('register.html')
-
-# Redirects to the login page
-@app.route('/redirect_to_login_page')
-def redirect_to_login_page():
-    return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    unittest.main()

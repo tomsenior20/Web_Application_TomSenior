@@ -39,7 +39,7 @@ The Data will automatically be re-rendered, upon action being completed.
 - python3 install sqlite3
 # Run Environment via the Source code
 The code can either be ran via the following two options:
-1. python3 test.py
+1. python3 main.py
 2. debugger window - via the flask application.
 3. it will then provide a IP in the terminal which will normally be host :5000
 

@@ -28,6 +28,8 @@ def check_register(full_name, password):
     # Handles all scenarios to when char are less than 4 -  removes whitespace using .strip()
     elif len(full_name.strip()) < 4 or len(password.strip()) < 4:
         msg = 'one of the mininum inputs requirements havent been met'
+    elif full_name.strip() == password.strip():
+        msg = "Username and password Cannot be the same"
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
         returned_register_message = check_and_register_user(

@@ -66,7 +66,7 @@ class TestInsertRow(unittest.TestCase):
         result = check_register("testuser", "testuser")
         print("@test_invalid_admin_reg - " + result)
         self.assertEqual(
-            result, 'one of the mininum inputs requirements havent been met')
+            result, 'User already exists in the database.')
 
     # Delete Functionality Unit Test
 
