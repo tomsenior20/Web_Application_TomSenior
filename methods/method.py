@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask, render_template, flash
-from model import User, DataRecord
+from methods.classes import User, DataRecord
 
 # Creates the tables on page load
 

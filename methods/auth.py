@@ -1,5 +1,6 @@
 from flask import Flask, flash, render_template
-from method import *
+from methods.auth import *
+from methods.method import *
 
 # Login Function
 

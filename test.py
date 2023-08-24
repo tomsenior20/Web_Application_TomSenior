@@ -1,20 +1,19 @@
+from methods.auth import *
 import unittest
 # Patch allows for me to mock the method
 from unittest.mock import patch
-from auth import check_login, check_register
-
 
 class TestInsertRow(unittest.TestCase):
     # Unit Test for Log in Methods
-    @patch('auth.check_login')
+    @patch('methods.auth.check_login')
     def test_successful_login(self, mock_successfull_login):
         mock_successfull_login = "success"
         # Passing in valid credentials in DB
-        result = check_login("admin", "admin")
+        result = check_login("admin", "admin1")
         print("@test_successful_login - " + result)
         self.assertEqual(result, "Logged In Successfully")
 
-    @patch('auth.check_login')
+    @patch('methods.auth.check_login')
     def test_failed_login(self, mock_invalid_login):
         # Setting Scenario for lower than char length
         result = check_login("sss", "ss")
@@ -22,7 +21,7 @@ class TestInsertRow(unittest.TestCase):
         self.assertEqual(
             result, "Password or Username is less than required characters")
 
-    @patch('auth.check_login')
+    @patch('methods.auth.check_login')
     def test_invalid_inputs(self, mock_invalid_login):
         # Testing For Empty Inputs
         result = check_login("", "")
@@ -42,7 +41,7 @@ class TestInsertRow(unittest.TestCase):
     #     self.assertEqual(result, "Success, User has been registered")
 
     # Check for Greater than 4 char
-    @patch('auth.check_register')
+    @patch('methods.auth.check_register')
     def test_invalid_reg(self, mock_text_reg):
         # Note this checks for < 4 characters
         result = check_register("dd", "ddd")
@@ -51,7 +50,7 @@ class TestInsertRow(unittest.TestCase):
             result, 'one of the mininum inputs requirements havent been met')
 
     # Checks for null entry
-    @patch('auth.check_register')
+    @patch('methods.auth.check_register')
     def test_null_reg(self, mock_text_reg):
         # Note checks for null entries
         result = check_register("", "")
@@ -60,13 +59,13 @@ class TestInsertRow(unittest.TestCase):
             result, 'Please Fill out all Inputs')
 
     # Checks for valid name and password but incorrect admin
-    @patch('auth.check_register')
+    @patch('methods.auth.check_register')
     def test_invalid_admin_reg(self, mock_text_reg):
         # Note checks for invalid admin entry
         result = check_register("testuser", "testuser")
         print("@test_invalid_admin_reg - " + result)
         self.assertEqual(
-            result, 'User already exists in the database.')
+            result, 'Username and password Cannot be the same')
 
     # Delete Functionality Unit Test
 

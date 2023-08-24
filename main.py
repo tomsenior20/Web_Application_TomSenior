@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash,jsonify,session
-from method import create_users_table, display_data
-from auth import *
+from methods.method import create_users_table, display_data
+from methods.auth import *
 import pdb
 
 app = Flask(__name__)

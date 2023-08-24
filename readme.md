@@ -1,6 +1,8 @@
 # Summary of Web Application
 The purpose of this application, was to mitiage a current issue with a logging system within my Organisation. Furthermore this solution will provide a comprehensive solution to  the previous issue. 
 
+By Defuault the user will be set to non admin, if the user requires support please contact Admin.
+
 ## The application will be established around the two following level of users.
 
 1. Non admin
@@ -16,7 +18,10 @@ The level of user will determine what buttons will display on the page where the
 1. Log In ( if the user is already exists )
 2. Register ( ** By Default the user will be set to none Admin, SQL Scripts are ran against it when authorized )
 
-![Log In / Register Screen](static/login.jpeg)
+### Loging In Page
+![Log In](static/images/LogingInPage.jpeg)
+### Loging In Page
+![Regestering Page ](static/images/register.jpeg)
 
 ## The Functionality of the Main Home page
 
@@ -25,7 +30,7 @@ For this main home page, will differ based on the level of user you have signed 
 The Data will automatically be re-rendered, upon action being completed.
 
 ### The Image Below is for an admin user ( Please not the black lines, are redacted information)
-![Log In / Register Screen](static/adminPriv.jpeg)
+![Log In / Register Screen](static/images/adminUser.jpeg)
 ### The Image Below is for an non Admin user ( Please not the black lines, are redacted information)
 ![Log In / Register Screen](static/nonAdmin.jpeg)
 
@@ -73,4 +78,5 @@ Please note there is one which has been commented out - for future development.
 2. check_register (auth.py)
 
 # Can run test via the following command
-- python3 testing.py
+1. Ensure your in the Correct directory ( run PWD in terminal)
+2. Run python3 test.py
