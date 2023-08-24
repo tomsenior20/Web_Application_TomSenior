@@ -32,7 +32,7 @@ The Data will automatically be re-rendered, upon action being completed.
 ### The Image Below is for an admin user ( Please not the black lines, are redacted information)
 ![Log In / Register Screen](static/images/adminUser.jpeg)
 ### The Image Below is for an non Admin user ( Please not the black lines, are redacted information)
-![Log In / Register Screen](static/nonAdmin.jpeg)
+![Log In / Register Screen](static/images/nonAdmin.jpeg)
 
 
 # Create Virtual Environment
