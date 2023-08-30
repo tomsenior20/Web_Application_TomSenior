@@ -9,9 +9,11 @@ def check_login(user_id, logInPassword):
     # Check for null values in form data
     if not all((user_id.strip(), logInPassword.strip())):
         login_message = "Please fill in all fields."
+    # Ensure Greater than 4 char
     elif len(user_id.strip()) < 4 or len(logInPassword.strip()) < 4:
         login_message = "Password or Username is less than required characters"
-    elif user_id == logInPassword:
+    # Ensure Password and UserNames don't match
+    elif user_id.strip() == logInPassword.strip():
         login_message = "Username or password cannot match"
     else:
         # Goes to method.py to validate against DB
@@ -31,6 +33,7 @@ def check_register(full_name, password):
     # Handles all scenarios to when char are less than 4 -  removes whitespace using .strip()
     elif len(full_name.strip()) < 4 or len(password.strip()) < 4:
         msg = 'one of the mininum inputs requirements havent been met'
+    # Ensure Username and password don't match
     elif full_name.strip() == password.strip():
         msg = "Username and password Cannot be the same"
     else:
