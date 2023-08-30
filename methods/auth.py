@@ -11,6 +11,8 @@ def check_login(user_id, logInPassword):
         login_message = "Please fill in all fields."
     elif len(user_id.strip()) < 4 or len(logInPassword.strip()) < 4:
         login_message = "Password or Username is less than required characters"
+    elif user_id == logInPassword:
+        login_message = "Username or password cannot match"
     else:
         # Goes to method.py to validate against DB
         check_login = check_login_check(user_id, logInPassword)

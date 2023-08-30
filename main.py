@@ -55,10 +55,10 @@ def register():
         # Based on condition, this will always render back to index.html
         if returned_message == "Success, User has been registered":
             flash(returned_message, 'success')
-            return render_template("index.html")
+            return render_template("register.html")
         else:
             flash(returned_message, "error")
-            return render_template("index.html")
+            return render_template("register.html")
 
 # Routing for the Log out button 
 @app.route('/redirect')
