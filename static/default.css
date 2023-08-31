@@ -8,8 +8,9 @@ html,body{
     background: linear-gradient(90deg, rgb(76, 100, 136),rgb(32, 91, 179));
     color:white;
     min-height: 100%;
+    height:100%;
     box-sizing: border-box;
-    overflow: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
