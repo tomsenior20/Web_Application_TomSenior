@@ -65,6 +65,24 @@
         </div>
         </div>
     </div>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close text-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-black">Are you sure you want to delete this row?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark text-white" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark text-white" form="deleteForm" name="action" value="confirmDelete" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <Section class="dataSection d-flex flex-column">
         <div class="my-4 p-2">
             <h1 class="text-center welcomeHeaderText">Worldline Note System</h1>
@@ -113,9 +131,9 @@
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
                 <button class="btn btn-light my-2">Update Row</button>
                 </form>
-                <form action="/delete_row_attempt" method="POST" class="d-flex flex-column mx-3 w-70">
-                <input type="text" class="form-control mt-2"  Placeholder="Type Location name to delete row" name='nameDelete' id="nameDelete"></input>
-                <button class="btn btn-light my-2">Delete Row</button>
+                <form action="/delete_row_attempt" method="POST" class="d-flex flex-column mx-3 w-70" id="deleteForm">
+                <input type="text" class="form-control mt-2" placeholder="Type Location name to delete row" name="nameDelete" id="nameDelete">
+                <button type="button" class="btn btn-light my-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Row</button>
                 </form>
             </div>
             <!-- Button for Creating Data into the Database -->
