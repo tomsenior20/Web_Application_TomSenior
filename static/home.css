@@ -30,6 +30,7 @@
 }
 
 
+/* Added Media query to handle some further enhancements */
 @media screen and (max-width: 800px) {
     .dataReturned{
         width: 90% !important;

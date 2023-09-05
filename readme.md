@@ -1,5 +1,7 @@
 # Summary of Web Application
-The purpose of this application, was to mitiage a current issue with a logging system within my Organisation. Furthermore this solution will provide a comprehensive solution to  the previous issue. 
+The purpose of this application, was to mitiage a current issue with a logging system within my Organisation. Furthermore this solution will provide a comprehensive solution to  the previous issue.  
+## Current Process 
+The Current process was done manually, therefore this system should be in replacement to update the manual paper equivalent and provide the correct way of logging tickets.
 
 By Defuault the user will be set to non admin, if the user requires support please contact Admin.
 
