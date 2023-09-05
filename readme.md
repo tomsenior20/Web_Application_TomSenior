@@ -73,12 +73,15 @@ The code can either be ran via the following two options:
 3. If admin is "no", you will just be able to see the rendered data. With a message showing "You have read only permisions"
 
 # Unit Tests - (Completed only ) 
-Can be accessed via testing.py - Have creates some test scenarios for each 
+Can be accessed via the test directory
 Please note there is one which has been commented out - for future development.
 
-1. check_login (auth.py)
-2. check_register (auth.py)
+1. check_login - tests/testLogin.py
+2. check_register -  tests/testRegister.py
 
 # Can run test via the following command
-1. Ensure your in the Correct directory ( run PWD in terminal)
-2. Run python3 test.py
+1. Ensure your in the main parent directory ( run PWD in terminal to check ) 
+## Run Register
+- python3 -m tests.testRegister
+## Run Login 
+python3 -m tests.testLogin

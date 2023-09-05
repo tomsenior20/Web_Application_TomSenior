@@ -1,9 +1,7 @@
 from flask import Flask, flash, render_template
-from methods.auth import *
 from methods.method import *
 
 # Login Function
-
 
 def check_login(user_id, logInPassword):
     # Check for null values in form data
