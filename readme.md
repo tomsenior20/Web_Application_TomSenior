@@ -109,6 +109,6 @@ Please note there is one which has been commented out - for future development.
 
 ## Run Login
 
-python3 -m tests.testLogin_test
+- python3 -m tests.testLogin_test
 
 ### Alternatively the results can be seen via the TEST Result TAB IN Visual Studio code
