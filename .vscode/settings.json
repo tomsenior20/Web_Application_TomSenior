@@ -2,6 +2,9 @@
     "python.pythonPath": "/usr/local/bin/python3",
     "git.ignoreLimitWarning": true,
     "liveServer.settings.port": 5501,
+    "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+    },
     "python.testing.unittestArgs": [
         "-v",
         "-s",
