@@ -82,7 +82,6 @@ def insert_row(location, comment, jobRole, company):
 
 
 def update_row_attempt(currentComment, newComment):
-    update_msg = None
     attempt_comment_update = None
     # Checks for the user comment is not null and above 2 characters
     if currentComment and newComment and len(newComment) > 2:
