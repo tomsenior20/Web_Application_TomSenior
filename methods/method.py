@@ -14,7 +14,7 @@ def table_exists(cursor, table_name):
 # It will then loop over the array of create_table, for each it will execute via for loop
 
 
-def create_users_table():
+def create_tables():
     # Connect to the database (creates a new database if it doesn't exist)
     conn = sqlite3.connect("database.db")
     # Create a cursor object to execute SQL commands

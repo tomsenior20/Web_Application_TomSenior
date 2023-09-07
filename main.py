@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash,jsonify,session
-from methods.method import create_users_table, display_data
+from methods.method import create_tables, display_data
 from methods.auth import *
 import pdb
 
@@ -14,7 +14,7 @@ password = None
 @app.route('/')
 def hello():
     # CREATES THE DATABASE IF THEY DON'T EXSIST
-    create_users_table()
+    create_tables()
     return render_template("index.html")
 
 # Log In function
