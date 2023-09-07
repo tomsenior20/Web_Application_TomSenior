@@ -1,6 +1,14 @@
 import sqlite3
 from flask import Flask, render_template, flash
 from methods.classes import User, DataRecord
+import re
+
+
+# Selects the table and will pass in the table param
+def table_exists(cursor, table_name):
+    cursor.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
+    return cursor.fetchone() is not None
 
 # Creates the tables on page load.
 # It will then loop over the array of create_table, for each it will execute via for loop
@@ -37,15 +45,21 @@ def create_users_table():
         )
     '''
     ]
-
-    # then loop over the list
-    for table in create_table:
-        # Runs the SQL Query to create each table from our list
-        cursor.execute(table)
-
-    # commit, close the connection
-    conn.commit()
-    conn.close()
+    try:
+        # then loop over the list
+        for table in create_table:
+            # Use regex to search for the table name in for loop
+            match = re.search(r'CREATE TABLE IF NOT EXISTS (\w+)', table)
+            if match:
+                table_name = match.group(1)
+                # Check if the table already exists
+                if not table_exists(cursor, table_name):
+                    cursor.execute(table)
+                    conn.commit()
+    except sqlite3.Error as exception:
+        return "Error" + str(exception)
+    finally:
+        conn.close()
 
 # Runs on register form submit, checks if user exists = true then it will not allow to register
 # If the user doesn't exist then this will register the user.
