@@ -2,7 +2,8 @@ import sqlite3
 from flask import Flask, render_template, flash
 from methods.classes import User, DataRecord
 
-# Creates the tables on page load
+# Creates the tables on page load.
+# It will then loop over the array of create_table, for each it will execute via for loop
 
 
 def create_users_table():
@@ -46,7 +47,8 @@ def create_users_table():
     conn.commit()
     conn.close()
 
-# Runs on register form submit
+# Runs on register form submit, checks if user exists = true then it will not allow to register
+# If the user doesn't exist then this will register the user.
 
 
 def check_and_register_user(user_id, password):
@@ -78,7 +80,8 @@ def check_and_register_user(user_id, password):
     conn.close()
     return msg
 
-# Check Login Credentials
+# Check Login Credentials, strips the username and password for whitespace
+# Checks if the user exists, if does login, else throw error.
 
 
 def check_login_check(username, password):
@@ -109,7 +112,7 @@ def check_login_check(username, password):
     conn.close()
     return loginMsg
 
-# Display Data Method
+# Display Data Method will select all from the table, loop over rows and create new data record
 
 
 def display_data():
@@ -131,7 +134,7 @@ def display_data():
     # Returns the object
     return record_list
 
-# Retrieve a User Record
+# Retrieve a User Record, match record and then create a new user class
 
 
 def get_user_record(username, password):

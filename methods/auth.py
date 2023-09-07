@@ -1,7 +1,8 @@
 from flask import Flask, flash, render_template
 from methods.method import *
 
-# Login Function
+# Login Function, checks the validation and then continue to check_login_check
+
 
 def check_login(user_id, logInPassword):
     # Check for null values in form data
@@ -22,7 +23,7 @@ def check_login(user_id, logInPassword):
             return check_login
 
 
-# Registers the user function
+# Registers the user function then to ensure Validation before continuing to check_and_register_user
 def check_register(full_name, password):
     # Check for null values in form data
     if not all((full_name.strip(), password.strip())):
@@ -45,6 +46,8 @@ def check_register(full_name, password):
 
 # Deletion of Row Function
 
+# checks the check_delete function validation then continue to delete_row()
+
 
 def check_delete(location):
     # Check if the location passed is null or not
@@ -59,7 +62,7 @@ def check_delete(location):
         else:
             return "error"
 
-# Inserting Row Function
+# Inserting Row Function, adds validation before continuing to inserting_row
 
 
 def insert_row(location, comment, jobRole, company):
@@ -75,7 +78,7 @@ def insert_row(location, comment, jobRole, company):
         else:
             return "Erorr Inserting Row"
 
-# Update Row
+# Update Row, checks validation before continuing to update_comment
 
 
 def update_row_attempt(currentComment, newComment):
