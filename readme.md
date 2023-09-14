@@ -1,6 +1,12 @@
 # Summary of Web Application
 
-The purpose of this application, was to mitiage a current issue with a logging system within my Organisation. Furthermore this solution will provide a comprehensive solution to the previous issue.
+The Purpose of this application was to solve the following issues currently faced with our process.
+
+- Process is currently done manually, leading to confused documentation about what is expected.
+- No structure if the tickets have been assigned or not to a work group.
+- No option to update the tickets.
+
+This solution will solve all the above outlined issues, and will become more of a structured solution allowing for more transparacy.
 
 ## Current Process
 
