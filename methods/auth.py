@@ -19,7 +19,11 @@ def check_login(user_id, logInPassword):
         check_login = check_login_check(user_id, logInPassword)
         if check_login == "Logged In Successfully":
             return check_login
-        elif check_login == "invalid password" or "User does not exsist" or "Please Enter Valid Inputs":
+        elif (
+            check_login == "invalid password"
+            or "User does not exsist"
+            or "Please Enter Valid Inputs"
+        ):
             return check_login
 
 
@@ -30,19 +34,19 @@ def check_register(full_name, password):
         return "Please Fill out all Inputs"
     # Handles all scenarios to when char are less than 4 -  removes whitespace using .strip()
     elif len(full_name.strip()) < 4 or len(password.strip()) < 4:
-        return 'one of the mininum inputs requirements havent been met'
+        return "one of the mininum inputs requirements havent been met"
     # Ensure Username and password don't match
     elif full_name.strip() == password.strip():
         return "Username and password Cannot be the same"
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
-        returned_register_message = check_and_register_user(
-            full_name, password)
+        returned_register_message = check_and_register_user(full_name, password)
         # Check the Message returned and assign a msg to it
         if returned_register_message == "Success, User has been registered":
             return returned_register_message
         elif returned_register_message == "User already exists in the database.":
             return returned_register_message
+
 
 # Deletion of Row Function
 
@@ -52,15 +56,16 @@ def check_register(full_name, password):
 def check_delete(location):
     # Check if the location passed is null or not
     if not location:
-        return 'Please fill out Location Input'
+        return "Please fill out Location Input"
     else:
         # Go to method.py and perform the SQL Script to delete
         attempt_delete = delete_row(location)
         # Based on the returned messaged you will show an message
-        if attempt_delete == 'success':
+        if attempt_delete == "success":
             return "Row Deleted"
         else:
             return "error"
+
 
 # Inserting Row Function, adds validation before continuing to inserting_row
 
@@ -68,15 +73,15 @@ def check_delete(location):
 def insert_row(location, comment, jobRole, company):
     # Check if the location passed is null or not
     if not (location and comment) or not (jobRole and company) or len(location) < 4:
-        return 'One of the inputs are invalid'
+        return "One of the inputs are invalid"
     else:
-        status_check_insert = inserting_row(
-            location, comment, jobRole, company)
+        status_check_insert = inserting_row(location, comment, jobRole, company)
         # Checks if the response is success or not
         if status_check_insert == "success":
             return "Row Successfully Inserted"
         else:
             return "Erorr Inserting Row"
+
 
 # Update Row, checks validation before continuing to update_comment
 
@@ -84,10 +89,16 @@ def insert_row(location, comment, jobRole, company):
 def update_row_attempt(currentComment, newComment):
     attempt_comment_update = None
     # Checks for the user comment is not null and above 2 characters
-    if currentComment and newComment and len(newComment) > 2:
-        attempt_comment_update = update_comment(currentComment, newComment)
+    if currentComment.strip() and newComment.strip() and len(newComment.strip()) > 2:
+        attempt_comment_update = update_comment(
+            currentComment.strip(), newComment.strip()
+        )
+    # If the new and old commend is none then return message
+    elif not currentComment.strip() and not newComment.strip():
+        return "Either current or new commend is invalid"
+    # Default Error to return
     else:
-        return 'error'
+        return "Updated of comment failed"
     # Gets Response from my attempt to update comment
-    if attempt_comment_update == 'Successfully Updated Row':
-        return 'Update Successful'
+    if attempt_comment_update == "Successfully Updated Row":
+        return "Update Successful"
