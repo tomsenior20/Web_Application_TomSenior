@@ -9,8 +9,6 @@
 .loginContainerForm{
     background: rgba(33, 77, 143, 0.2);
     border-radius: 1rem;
-    padding:3rem;
-    width:40%;
     margin: auto;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -19,7 +17,7 @@
 }
 
 .input-group span{
-    width:30% !important;
+    width:40% !important;
 }
 
 .formText{
@@ -37,10 +35,16 @@
 }
 
 @media screen and (max-width: 800px) {
-    .loginContainerForm{
-        width:80%;
-    }
     .input-group-text{
         width: 45% !important;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .input-group span{
+        width:45% !important;
+    }
+    .form-control{
+        width:40% !important;
     }
 }
