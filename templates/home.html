@@ -83,32 +83,32 @@
             </div>
         </div>
     </div>
-    <Section class="dataSection d-flex flex-column">
+    <Section class="dataSection d-flex flex-column container-fluid">
         <div class="my-4 p-2">
             <h1 class="text-center welcomeHeaderText">Worldline Note System</h1>
         </div>
-    <div class="dataReturned w-75 m-auto p-3 p-md-2">
+    <div class="dataReturned container-fluid p-1 p-md-2">
     <h2 class="dataRetunedHeader text-start my-2">Incidents Recorded: </h2>
     <!-- if returned_data is greater than 0, continue to execute this code -->
     {% if returned_data %}
             <!-- Generates Table for the Data -->
-        <table class="table table-bordered rounded">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="data_record_header" scope="col">Location</th>
-                    <th class="data_record_header" scope="col">Comment</th>
-                    <th class="data_record_header" scope="col">Job Role</th>
-                    <th class="data_record_header" scope="col">Company</th>
+                    <th class="data_record_header w-25 text-break" scope="col">Location</th>
+                    <th class="data_record_header w-25" scope="col">Comment</th>
+                    <th class="data_record_header w-25" scope="col">Job Role</th>
+                    <th class="data_record_header w-25" scope="col">Company</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- For each record the table row with table columns will be created -->
                 {% for data_record in returned_data %}
                 <tr>
-                    <td class="data_record_text">{{ data_record.Location }}</td>
-                    <td class="data_record_text">{{ data_record.comment }}</td>
-                    <td class="data_record_text">{{ data_record.jobrole }}</td>
-                    <td class="data_record_text">{{ data_record.company }}</td>
+                    <td class="data_record_text w-25 text-break">{{ data_record.Location }}</td>
+                    <td class="data_record_text w-25 text-break">{{ data_record.comment }}</td>
+                    <td class="data_record_text w-25 text-break">{{ data_record.jobrole }}</td>
+                    <td class="data_record_text w-25 text-break">{{ data_record.company }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
