@@ -5,14 +5,16 @@ from methods.method import *
 
 
 def check_login(user_id, logInPassword):
+    user_id = user_id.strip()
+    logInPassword = logInPassword.strip()
     # Check for null values in form data
-    if not all((user_id.strip(), logInPassword.strip())):
+    if not all((user_id, logInPassword)):
         return "Please fill in all fields."
     # Ensure Greater than 4 char
-    elif len(user_id.strip()) < 4 or len(logInPassword.strip()) < 4:
+    elif len(user_id) < 4 or len(logInPassword) < 4:
         return "Password or Username is less than required characters"
     # Ensure Password and UserNames don't match
-    elif user_id.strip() == logInPassword.strip():
+    elif user_id == logInPassword:
         return "Username or password cannot match"
     else:
         # Goes to method.py to validate against DB
@@ -29,18 +31,21 @@ def check_login(user_id, logInPassword):
 
 # Registers the user function then to ensure Validation before continuing to check_and_register_user
 def check_register(full_name, password):
+    fullname = full_name.strip()
+    password = password.strip()
+
     # Check for null values in form data
-    if not all((full_name.strip(), password.strip())):
+    if not all((fullname, password)):
         return "Please Fill out all Inputs"
     # Handles all scenarios to when char are less than 4 -  removes whitespace using .strip()
-    elif len(full_name.strip()) < 4 or len(password.strip()) < 4:
+    elif len(fullname) < 4 or len(password) < 4:
         return "one of the mininum inputs requirements havent been met"
     # Ensure Username and password don't match
-    elif full_name.strip() == password.strip():
+    elif fullname == password:
         return "Username and password Cannot be the same"
     else:
         # Goes to Method.PY to fetch the data and check if exsists if not store.
-        returned_register_message = check_and_register_user(full_name, password)
+        returned_register_message = check_and_register_user(fullname, password)
         # Check the Message returned and assign a msg to it
         if returned_register_message == "Success, User has been registered":
             return returned_register_message
@@ -88,13 +93,14 @@ def insert_row(location, comment, jobRole, company):
 
 def update_row_attempt(currentComment, newComment):
     attempt_comment_update = None
+    currentComment = currentComment.strip()
+    newComment = newComment.strip()
+
     # Checks for the user comment is not null and above 2 characters
-    if currentComment.strip() and newComment.strip() and len(newComment.strip()) > 2:
-        attempt_comment_update = update_comment(
-            currentComment.strip(), newComment.strip()
-        )
+    if currentComment and newComment and len(newComment) > 2:
+        attempt_comment_update = update_comment(currentComment, newComment)
     # If the new and old commend is none then return message
-    elif not currentComment.strip() and not newComment.strip():
+    elif not currentComment and not newComment:
         return "Either current or new commend is invalid"
     # Default Error to return
     else:
