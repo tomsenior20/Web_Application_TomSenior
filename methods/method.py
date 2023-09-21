@@ -165,7 +165,6 @@ def display_data():
         )
         # Fetches all the rows associated to the query
         rows = cursor.fetchall()
-        # Creates Empty array for the data
         record_list = []
         # For each row in the fetched rows, create new DataRecord object and assign values and append to previous object
         for record in rows:

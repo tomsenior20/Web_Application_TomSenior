@@ -1,6 +1,10 @@
+# Introduction
+
+Hello i'm Tom Senior, this project will deliver all the outlined criteria below.
+
 # Summary of Web Application
 
-The Purpose of this application was to solve the following issues currently faced with our process.
+The Purpose of this application was to solve the following issues currently faced with our process in logging support tickets.
 
 - Process is currently done manually, leading to confused documentation about what is expected.
 - No structure if the tickets have been assigned or not to a work group.
@@ -15,6 +19,8 @@ The Current process was done manually, therefore this system should be in replac
 By Defuault the user will be set to non admin, if the user requires support please contact Admin.
 
 ## The application will be established around the two following level of users.
+
+### By Default the user will be assigned to a Non Admin, to apply to the principle of lease privilege.
 
 1. Non admin
 2. Admin.
@@ -56,6 +62,8 @@ The Data will automatically be re-rendered, upon action being completed.
 - python3 -m venv <name of environment>
 
 # Activating the Environment
+
+Ensuring this is activated, if you are pulling the environment. Without this being activated it might lead to errors with running the enviroment.
 
 - source venv/bin/activate
 
@@ -109,6 +117,8 @@ Please note there is one which has been commented out - for future development.
 
 1. Ensure your in the main parent directory ( run PWD in terminal to check )
 
+# Alternatively if you are cloning the code into Visual Studio code, the testing window is avaliable down the left hand side of the page.
+
 ## Run Register
 
 - python3 -m tests.testRegister_test
@@ -116,5 +126,3 @@ Please note there is one which has been commented out - for future development.
 ## Run Login
 
 - python3 -m tests.testLogin_test
-
-### Alternatively the results can be seen via the TEST Result TAB IN Visual Studio code
