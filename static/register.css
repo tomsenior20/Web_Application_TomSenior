@@ -1,5 +1,6 @@
 /* Main Register Section */
 .registerContainer{
+    /* Will calculate the height of the container based of default nav & Footer elements */
     height: calc(100vh - (60px + 60px)) !important;
     display: flex;
     align-items: center;
