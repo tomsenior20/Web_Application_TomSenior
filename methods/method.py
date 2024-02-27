@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, flash
 from methods.classes import User, DataRecord
+import bcrypt
 import re
 
 
@@ -90,7 +91,11 @@ def check_and_register_user(user_id, password):
             if len(user_id) >= 4 and len(password) >= 4:
                 try:
                     # Assigns the parameters to an class
-                    new_user = User(user_id, password, "no")
+                    password_bytes = password.encode("utf-8")
+                    salt = bcrypt.gensalt()
+                    hashed = bcrypt.hashpw(password_bytes, salt)
+
+                    new_user = User(user_id, hashed, "no")
                     cursor.execute(
                         "INSERT INTO users (user_id, Password, Admin) VALUES (?, ?, ?)",
                         (new_user.user_id, new_user.password, new_user.admin_privilege),
