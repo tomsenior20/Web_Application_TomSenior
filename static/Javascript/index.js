@@ -18,9 +18,11 @@ function handleCheck(checked, page) {
         switch (page) {
             case "/":
             case "/redirect_to_login_page":
+            case "/login":
                 document.getElementById("Password").type = "text";
                 break;
             case "/redirect_to_Register_page":
+            case "/register":
                 document.getElementById("registerPassword").type = "text";
                 break;
             default:
@@ -31,9 +33,11 @@ function handleCheck(checked, page) {
         switch (page) {
             case "/":
             case "/redirect_to_login_page":
+            case "/login":
                 document.getElementById("Password").type = "password";
                 break;
             case "/redirect_to_Register_page":
+            case "/register":
                 document.getElementById("registerPassword").type = "password";
                 break;
             default:
