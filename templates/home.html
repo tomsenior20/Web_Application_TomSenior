@@ -96,25 +96,50 @@
             <thead>
                 <tr class="row">
                     <th class="data_record_header text-break col-2" scope="col">Location</th>
-                    <th class="data_record_header col-4" scope="col">Comment</th>
+                    <th class="data_record_header col-2" scope="col">Comment</th>
                     <th class="data_record_header col-2" scope="col">Job Role</th>
                     <th class="data_record_header col-2" scope="col">Company</th>
-                    <th class="data_record_header col-2" scope="col">Delete Row</th>
+                    {% for user in returned_user%}
+                    {% if user and user.admin_privilege == 'yes' %}
+                    <th class="data_record_header col-2 text-center" scope="col">Delete Row</th>
+                    {% endif %}
+                    {% endfor %}
+                    <th class="data_record_header col-2 text-center" scope="col">Confirm Update</th>
+
                 </tr>
             </thead>
             <tbody>
                 <!-- For each record the table row with table columns will be created -->
                 {% for data_record in returned_data %}
                 <tr class="row">
-                    <td class="data_record_text col-2 text-break">{{ data_record.Location }}</td>
-                    <td class="data_record_text col-4 text-break">{{ data_record.comment }}</td>
-                    <td class="data_record_text col-2 text-break">{{ data_record.jobrole }}</td>
-                    <td class="data_record_text col-2 text-break">{{ data_record.company }}</td>
-                    <td class="data_record_text col-2 text-break">
+                    <td class="data_record_text col-2 d-flex justify-content-start align-items-center" id="location" name="location" value="{{ data_record.location }}">{{ data_record.Location }}</td>
+                    <td class="data_record_text col-2 d-flex justify-content-start align-items-center">
+                        <input class="border-0 p-2 editRecord w-75" id="comment" name="comment" value="{{ data_record.comment }}" onchange="updateHiddenInput('comment', this.value)"></input>
+                    </td>
+                    <td class="data_record_text col-2 d-flex justify-content-center align-items-center">
+                        <input class="border-0 p-2 editRecord w-75" id="JobRole" name="JobRole" value="{{ data_record.jobrole }}" onchange="updateHiddenInput('JobRole', this.value)"></input>
+                    </td>
+                    <td class="data_record_text col-2 d-flex justify-content-center align-items-center">
+                        <input class="border-0 p-2 editRecord w-75" id="company" name="company" value="{{ data_record.company }}" onchange="updateHiddenInput('company', this.value)"></input>
+                    </td>
+                    {% for user in returned_user%}
+                    {% if user and user.admin_privilege == 'yes' %}
+                    <td class="data_record_text col-2 d-flex justify-content-center align-items-center">
                         <form action="/delete_row_attempt" method="POST" class="delete_form">
                             <input type="hidden" name="location" value="{{data_record.Location}}">
                             <button class="btn btn-danger delete_btn" type="submit">Delete row</button>
                         </form>
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                    <td class="data_record_text col-2 d-flex justify-content-center align-items-center">
+                    <form action="/update_row" method="POST" class="update_form">
+                        <input type="hidden" id="hidden_location" name="location">
+                        <input type="hidden" id="hidden_comment" name="comment">
+                        <input type="hidden" id="hidden_JobRole" name="JobRole">
+                        <input type="hidden" id="hidden_company" name="company">
+                        <button class="btn btn-success success_btn" type="submit">Confirm</button>
+                    </form>
                     </td>
                 </tr>
                 {% endfor %}
@@ -130,28 +155,7 @@
         </div>
         <!-- Section for buttons to show / delete update data -->
         <div class="buttonMainContainer d-flex flex-column flex-md-row flex-lg-row flex-xl-row p-2 align-items-center justify-content-evenly m-auto w-75">
-            {% for user in returned_user%}
-            {% if user and user.admin_privilege == 'yes' %}
-            <!-- Button for Updating Data in the Database -->
-            <div class=" d-flex flex-column w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
-                <form action="update_row" method="POST" class="d-flex flex-column mx-3 w-70">
-                <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter New Comment (min 4 characters)" name="newComment" id="newComment"></input>
-                <button class="btn btn-light my-2">Update Row</button>
-                </form>
-            </div>
-            <!-- Button for Creating Data into the Database -->
-            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50  buttonContainer">
-                <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
-                <input type="text" class="form-control mt-2" Placeholder="Enter Location (min 4 char, Loc must be unique)" name='nameInsert' id="nameInsert"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter Comment" name='commentInsert' id="commentInsert"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter Job Role" name='jobRole' id="jobRole"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter Company" name='companyInsert' id="companyInsert"></input>
-                <button class="btn btn-light my-2">Create Row</button>
-                </form>
-            </div>
-            {% else %}
-                <!-- If not admin user you will be only be able to update / create ( Read only covered via Data rendered to page -->
+            <!-- If not admin user you will be only be able to update / create ( Read only covered via Data rendered to page -->
             <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
                 <form action="/insert_row_attempt" method="POST" class="d-flex flex-column m-3 w-100">
                 <input type="text" class="form-control mt-2" Placeholder="Enter Location (min 4 char)" name='nameInsert' id="nameInsert"></input>
@@ -160,17 +164,6 @@
                 <input type="text" class="form-control mt-2" Placeholder="Enter Company" name='companyInsert' id="companyInsert"></input>
                 <button class="btn btn-light my-2">Create Row</button>
                 </form>
-            </div>
-            <!-- Button for Updating Data in the Database -->
-            <div class=" d-flex flex-row w-100 w-md-50 w-lg-50 w-xl-50 buttonContainer">
-                <form action="update_row" method="POST" class="d-flex flex-column m-3 w-100">
-                <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
-                <input type="text" class="form-control mt-2" Placeholder="Enter New Comment" name="newComment" id="newComment"></input>
-                <button class="btn btn-light my-2">Update Row</button>
-                </form>
-            </div>
-            {% endif %}
-            {% endfor %}
             </div>
         </div>
     </Section>
@@ -182,6 +175,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="{{ url_for('static', filename='Javascript/home.js') }}"></script>
 
+</body>
 </html>

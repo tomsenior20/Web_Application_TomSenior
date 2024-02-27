@@ -91,16 +91,18 @@ def insert_row(location, comment, jobRole, company):
 # Update Row, checks validation before continuing to update_comment
 
 
-def update_row_attempt(currentComment, newComment):
+def update_row_attempt(location, comment, jobrole, company):
     attempt_comment_update = None
-    currentComment = currentComment.strip()
-    newComment = newComment.strip()
+    location = location.strip()
+    comment = comment.strip()
+    jobrole = jobrole.strip()
+    company = company.strip()
 
     # Checks for the user comment is not null and above 2 characters
-    if currentComment and newComment and len(newComment) > 2:
-        attempt_comment_update = update_comment(currentComment, newComment)
+    if location and comment and jobrole and company:
+        attempt_comment_update = update_comment(location, comment, jobrole, company)
     # If the new and old commend is none then return message
-    elif not currentComment and not newComment:
+    elif not comment and not jobrole and company:
         return "Either current or new commend is invalid"
     # Default Error to return
     else:

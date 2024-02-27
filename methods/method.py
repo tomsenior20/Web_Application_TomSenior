@@ -323,7 +323,7 @@ def update_location(oldLocation, newLocation):
 # Updating comment
 
 
-def update_comment(oldComment, newComment):
+def update_comment(location, comment, jobrole, company):
     try:
         conn = sqlite3.connect("database.db")
         cursor = conn.cursor()
@@ -331,20 +331,24 @@ def update_comment(oldComment, newComment):
         print("Error" + str(exception))
     try:
         # See if the record is present in the DB with the old comment
-        cursor.execute("select * from data WHERE Comment = ?", (newComment,))
+        cursor.execute("select * from data WHERE LOCATION = ?", (location,))
         existing_comment = cursor.fetchall()
         # If the record is existing then we don't want to over ride it / throw error
-        if existing_comment:
-            return "Error - New Comment already exists in the database"
+        if not existing_comment:
+            return "Error - Location doesn't exist in the database"
         else:
             # Selects the all comment from the DB
-            cursor.execute("select * from data WHERE Comment = ?", (oldComment,))
+            cursor.execute("select * from data WHERE LOCATION = ?", (location,))
             comment_record = cursor.fetchall()
 
             if comment_record:
                 cursor.execute(
-                    "UPDATE data SET Comment = ? WHERE Comment = ? ",
-                    (newComment, oldComment),
+                    "UPDATE data SET Comment = ? WHERE Location = ? ",
+                    (comment, location),
+                )
+                cursor.execute(
+                    "UPDATE assignmentGroup SET JOBROLE = ?, COMPANY = ? WHERE Location = ? ",
+                    (jobrole, company, location),
                 )
                 conn.commit()
                 return "Successfully Updated Row"

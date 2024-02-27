@@ -136,11 +136,14 @@ def insert_row_attempt():
 def update_row():
     if request.method == "POST":
         # Get Form Input for Update
-        current_comment = request.form.get("currentComment")
-        new_comment = request.form.get("newComment")
+        location = request.form.get("location")
+        current_comment = request.form.get("comment")
+        job_role = request.form.get("JobRole")
+        company = request.form.get("company")
+
         # Check update row  Section and remove whitespace if accidentally added
         attemping_update = update_row_attempt(
-            current_comment.strip(), new_comment.strip()
+            location, current_comment.strip(), job_role.strip(), company.strip()
         )
         # Checked for Success message from update_row_attempt and handle correctly
         if attemping_update == "Update Successful":
