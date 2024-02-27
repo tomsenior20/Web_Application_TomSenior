@@ -16,6 +16,7 @@ function handleCheck(checked, page) {
     console.log(page)
     if (checked === true) {
         switch (page) {
+            case "/":
             case "/redirect_to_login_page":
                 document.getElementById("Password").type = "text";
                 break;
@@ -28,6 +29,7 @@ function handleCheck(checked, page) {
     }
     else {
         switch (page) {
+            case "/":
             case "/redirect_to_login_page":
                 document.getElementById("Password").type = "password";
                 break;
