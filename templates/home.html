@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,31 +87,40 @@
             <h1 class="text-center welcomeHeaderText">Worldline Note System</h1>
         </div>
     <div class="dataReturned container-fluid p-1 p-md-2">
-    <h2 class="dataRetunedHeader text-start my-2">Incidents Recorded: </h2>
+        <h2 class="dataRetunedHeader text-center my-2">Incidents Recorded: </h2>
     <!-- if returned_data is greater than 0, continue to execute this code -->
     {% if returned_data %}
+    <div class="table-container">
             <!-- Generates Table for the Data -->
         <table class="table">
             <thead>
-                <tr>
-                    <th class="data_record_header w-25 text-break" scope="col">Location</th>
-                    <th class="data_record_header w-25" scope="col">Comment</th>
-                    <th class="data_record_header w-25" scope="col">Job Role</th>
-                    <th class="data_record_header w-25" scope="col">Company</th>
+                <tr class="row">
+                    <th class="data_record_header text-break col-2" scope="col">Location</th>
+                    <th class="data_record_header col-4" scope="col">Comment</th>
+                    <th class="data_record_header col-2" scope="col">Job Role</th>
+                    <th class="data_record_header col-2" scope="col">Company</th>
+                    <th class="data_record_header col-2" scope="col">Delete Row</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- For each record the table row with table columns will be created -->
                 {% for data_record in returned_data %}
-                <tr>
-                    <td class="data_record_text w-25 text-break">{{ data_record.Location }}</td>
-                    <td class="data_record_text w-25 text-break">{{ data_record.comment }}</td>
-                    <td class="data_record_text w-25 text-break">{{ data_record.jobrole }}</td>
-                    <td class="data_record_text w-25 text-break">{{ data_record.company }}</td>
+                <tr class="row">
+                    <td class="data_record_text col-2 text-break">{{ data_record.Location }}</td>
+                    <td class="data_record_text col-4 text-break">{{ data_record.comment }}</td>
+                    <td class="data_record_text col-2 text-break">{{ data_record.jobrole }}</td>
+                    <td class="data_record_text col-2 text-break">{{ data_record.company }}</td>
+                    <td class="data_record_text col-2 text-break">
+                        <form action="/delete_row_attempt" method="POST" class="delete_form">
+                            <input type="hidden" name="location" value="{{data_record.Location}}">
+                            <button class="btn btn-danger delete_btn" type="submit">Delete row</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
         <!-- Creates Div if data is null -->
         {% else %}
         <div class="no_data text-center mt-3">
@@ -130,10 +138,6 @@
                 <input type="text" class="form-control mt-2" Placeholder="Enter Current Comment" name="currentComment" id="currentComment"></input>
                 <input type="text" class="form-control mt-2" Placeholder="Enter New Comment (min 4 characters)" name="newComment" id="newComment"></input>
                 <button class="btn btn-light my-2">Update Row</button>
-                </form>
-                <form action="/delete_row_attempt" method="POST" class="d-flex flex-column mx-3 w-70" id="deleteForm">
-                <input type="text" class="form-control mt-2" placeholder="Type Location name to delete row" name="nameDelete" id="nameDelete">
-                <button type="button" class="btn btn-light my-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete Row</button>
                 </form>
             </div>
             <!-- Button for Creating Data into the Database -->

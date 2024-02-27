@@ -17,6 +17,17 @@
     padding: 1rem;
 }
 
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.table {
+    width: 80%;
+}
+
 /* Sets the background of the Data Columns */
 .data_record_header{
     background:rgb(184, 184, 184) !important;
