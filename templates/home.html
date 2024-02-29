@@ -95,7 +95,7 @@
         <table class="table">
             <thead>
                 <tr class="row">
-                    {% for user in returned_user%}
+                    {% for user in returned_user %}
                     <th class="data_record_header text-break col-1" scope="col">Location</th>
                     {% if user and user.admin_privilege == 'yes' %}
                     <th class="data_record_header col-3" scope="col">Comment</th>
@@ -117,8 +117,9 @@
                 {% for data_record in returned_data %}
                 <tr class="row">
                     <td class="data_record_text col-1 d-flex justify-content-start align-items-center flex-wrap" id="location" name="location" value="{{ data_record.location }}">{{ data_record.Location }}</td>
-                    {% if data_record and data_record.admin_privilege == 'yes' %}
-                    <td class="data_record_text col-2 d-flex justify-content-start align-items-center flex-wrap">
+                    {% for user in returned_user %}
+                    {% if data_record and user.admin_privilege == 'yes' %}
+                    <td class="data_record_text col-3 d-flex justify-content-start align-items-center flex-wrap">
                         <input class="border-0 p-2 editRecord w-100" id="comment" name="comment" value="{{ data_record.comment }}" onchange="updateHiddenInput('comment', this.value)"></input>
                     </td>
                     {% else %}
@@ -126,13 +127,14 @@
                         <input class="border-0 p-2 editRecord w-100" id="comment" name="comment" value="{{ data_record.comment }}" onchange="updateHiddenInput('comment', this.value)"></input>
                         </td>
                     {% endif %}
+                    {% endfor %}
                     <td class="data_record_text col-2 d-flex justify-content-center align-items-center flex-wrap">
                         <input class="border-0 p-2 editRecord w-100" id="JobRole" name="JobRole" value="{{ data_record.jobrole }}" onchange="updateHiddenInput('JobRole', this.value)"></input>
                     </td>
                     <td class="data_record_text col-2 d-flex justify-content-center align-items-center flex-wrap">
                         <input class="border-0 p-2 editRecord w-100" id="company" name="company" value="{{ data_record.company }}" onchange="updateHiddenInput('company', this.value)"></input>
                     </td>
-                    {% for user in returned_user%}
+                    {% for user in returned_user %}
                     {% if user and user.admin_privilege == 'yes' %}
                     <td class="data_record_text col-2 d-flex justify-content-center align-items-center">
                         <form action="/delete_row_attempt" method="POST" class="delete_form">

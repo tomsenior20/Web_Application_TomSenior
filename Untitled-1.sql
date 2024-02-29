@@ -1,5 +1,9 @@
 -- SQLite
-SELECT ID, user_id, Password, Admin
+SELECT *
 FROM users;
 
-select * From users;
+update users
+set Admin = "yes"
+where id = "12";
+
+Delete from users where id = 3;

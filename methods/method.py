@@ -92,8 +92,8 @@ def check_and_register_user(user_id, password):
                 try:
                     # Assigns the parameters to an class
                     password_bytes = password.encode("utf-8")
-                    salt = bcrypt.gensalt()
-                    hashed = bcrypt.hashpw(password_bytes, salt)
+
+                    hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
 
                     new_user = User(user_id, hashed, "no")
                     cursor.execute(
@@ -126,10 +126,7 @@ def check_login_check(username, password):
         print("Error" + str(exception))
     try:
         if username and username.strip() and password and password.strip():
-            cursor.execute(
-                "SELECT * from users WHERE user_id = ? AND password = ?",
-                (username, password),
-            )
+            cursor.execute("SELECT * from users WHERE user_id = ?", (username,))
             # Fetchs one record using fetchone()
             user = cursor.fetchone()
             # Checks if the user exists
@@ -137,8 +134,10 @@ def check_login_check(username, password):
                 # Assigns each column to my class
                 retuned_record = User(user[1], user[2], user[3])
                 # Checks if the entered password & username match the record, return the relevant success / error message
+                stored_password_hash = user[2]
+
                 if (
-                    retuned_record.password == password
+                    bcrypt.checkpw(password.encode("utf-8"), stored_password_hash)
                     and retuned_record.user_id == username
                 ):
                     return "Logged In Successfully"
@@ -196,11 +195,8 @@ def get_user_record(username, password):
     # Executes the SQL Query
     try:
         cursor.execute(
-            "SELECT * FROM users WHERE user_id = ? and Password = ?",
-            (
-                username,
-                password,
-            ),
+            "SELECT * FROM users WHERE user_id = ?",
+            (username,),
         )
         user = cursor.fetchall()
 
