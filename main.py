@@ -174,5 +174,11 @@ def redirect_to_login_page():
     return render_template("index.html")
 
 
+# Forgot Password Route
+@app.route("/forgotPassword.html")
+def redirect_forgotPassword():
+    return render_template("forgotPassword.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
